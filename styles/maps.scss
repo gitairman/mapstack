@@ -13,3 +13,13 @@ body {
 i {
   margin-right: 10px;
 }
+
+#maps-list {
+  position: absolute;
+  top: 10%;
+  z-index: 9999;
+}
+
+#maps-list:hover {
+  cursor: pointer;
+}

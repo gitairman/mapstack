@@ -43,7 +43,15 @@ const renderPointMarker = (point) => {
   // .openPopup();
 };
 
+const clearMap = () => {
+  map.eachLayer((layer) => {
+    if (layer._leaflet_id !== 25) map.removeLayer(layer);
+  });
+};
+
 const addPoints = (map_id) => {
+  clearMap();
+
   $.get(`/api/points/${map_id}`)
     .done(({ points }) => {
       points.forEach((point) => {
@@ -62,13 +70,24 @@ const listMaps = () => {
 };
 
 const createMapsList = (maps) => {
-  const $mapsList = $("#map-list");
+  console.log(maps);
+
+  const $mapsList = $("#maps-list");
   $mapsList.empty();
   maps.forEach((map) => {
-    $(`<li class="map">`).text(map.name).appendTo($mapsList);
+    $(`<li class="map" id=${map.id}>`)
+      .text(map.name)
+      .appendTo($mapsList)
+      .on("click", handleMapClick);
   });
+};
+
+const handleMapClick = (e) => {
+  console.log(e.target.id);
+  addPoints(e.target.id);
 };
 
 $(() => {
   getPosition();
+  listMaps();
 });
