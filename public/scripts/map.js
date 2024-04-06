@@ -17,6 +17,7 @@ const loadMap = (position) => {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(map);
+  L.Control.geocoder().addTo(map);
 
   // Handling clicks on map
   map.on("click", () => {
