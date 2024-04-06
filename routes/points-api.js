@@ -7,15 +7,29 @@
 
 const express = require("express");
 const router = express.Router();
-const userQueries = require("../db/queries/users");
+const pointQueries = require("../db/queries/points");
 
 router.get("/", (req, res) => {
-  console.log("hello from users api");
+  console.log("hello");
 
-  userQueries
-    .getUsers()
-    .then((users) => {
-      res.json({ users });
+  pointQueries
+    .getAllPoints()
+    .then((points) => {
+      res.json({ points });
+    })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  console.log("hello");
+
+  pointQueries
+    .getPointsByMapId(id)
+    .then((points) => {
+      res.json({ points });
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

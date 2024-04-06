@@ -1,3 +1,5 @@
+let map;
+
 const getPosition = () => {
   if (navigator.geolocation)
     navigator.geolocation.getCurrentPosition(loadMap, function () {
@@ -11,7 +13,7 @@ const loadMap = (position) => {
 
   const coords = [latitude, longitude];
 
-  const map = L.map("map").setView(coords, 13);
+  map = L.map("map").setView(coords, 13);
 
   L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
     attribution:
@@ -21,8 +23,52 @@ const loadMap = (position) => {
 
   // Handling clicks on map
   map.on("click", () => {
-    console.log("map was clicked");
+    console.log("you clicked on the map");
   });
 };
 
-getPosition();
+const renderPointMarker = (point) => {
+  L.marker(Object.values(point.coords), { title: point.title })
+    .addTo(map)
+    .bindPopup(
+      L.popup({
+        maxWidth: 250,
+        minWidth: 100,
+        autoClose: false,
+        closeOnClick: false,
+        className: `point-popup`,
+      })
+    )
+    .setPopupContent(`${point.image_url}<span>${point.description}</span`);
+  // .openPopup();
+};
+
+const addPoints = (map_id) => {
+  $.get(`/api/points/${map_id}`)
+    .done(({ points }) => {
+      points.forEach((point) => {
+        renderPointMarker(point);
+      });
+      const group = new L.featureGroup(Object.values(map._layers).slice(1));
+      map.fitBounds(group.getBounds());
+    })
+    .fail((err) => console.log(err));
+};
+
+const listMaps = () => {
+  $.get(`/api/maps`).done(({ maps }) => {
+    createMapsList(maps);
+  });
+};
+
+const createMapsList = (maps) => {
+  const $mapsList = $("#map-list");
+  $mapsList.empty();
+  maps.forEach((map) => {
+    $(`<li class="map">`).text(map.name).appendTo($mapsList);
+  });
+};
+
+$(() => {
+  getPosition();
+});
