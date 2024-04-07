@@ -36,6 +36,18 @@
     <script src="/scripts/map.js" defer></script>
   </head>
   <body>
+    <form id="point-form" class="hidden">
+      <input id="point-title" name="title" type="text" placeholder="title" />
+      <textarea
+        name="description"
+        type="text"
+        placeholder="description"
+      ></textarea>
+      <div>
+        <button type="submit">Add Point</button>
+        <button type="reset" id="cancel-point">Cancel</button>
+      </div>
+    </form>
     <div id="map"></div>
     <div id="maplist-container"><ul id="maps-list"></ul></div>
   </body>

@@ -44,3 +44,18 @@ i {
 //   visibility: visible;
 //   background-color: white;
 // }
+
+#point-form {
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+  position: absolute;
+  border: solid black 2px;
+  border-radius: 5%;
+  background-color: blue;
+  padding: 10px;
+}
+
+#point-form.hidden {
+  display: none;
+}

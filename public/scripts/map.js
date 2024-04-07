@@ -1,10 +1,28 @@
 let map;
+let loggedIn = true;
 
 const getPosition = () => {
   if (navigator.geolocation)
     navigator.geolocation.getCurrentPosition(loadMap, function () {
       alert("Could not get your position");
     });
+};
+
+const handleMapClick = (e) => {
+  if (!loggedIn) return;
+
+  console.log(e);
+  console.log($("#map").data("map_id"));
+
+  console.log("you clicked on the map");
+  // const $markerPane = $(".leaflet-marker-pane");
+  const $pointForm = $("#point-form");
+  $pointForm
+    .css("top", e.layerPoint.y)
+    .css("left", e.layerPoint.x)
+    .removeClass("hidden");
+
+  $("#point-title").trigger("focus");
 };
 
 const loadMap = (position) => {
@@ -22,12 +40,12 @@ const loadMap = (position) => {
   L.Control.geocoder().addTo(map);
 
   // Handling clicks on map
-  map.on("click", () => {
-    console.log("you clicked on the map");
-  });
+  map.on("click", handleMapClick);
 };
 
 const renderPointMarker = (point) => {
+  let popupContent = `${point.image_url}<span>${point.description}</span>`;
+
   const marker = L.marker(Object.values(point.coords), { title: point.title });
   marker.addTo(map).bindPopup(
     L.popup({
@@ -37,13 +55,18 @@ const renderPointMarker = (point) => {
       closeOnClick: false,
       className: `point-popup`,
     })
-  ).setPopupContent(`
-    ${point.image_url}<span>${point.description}</span>
-    <button onclick="removeMarker(${marker._leaflet_id})">Remove Point</button>`);
-  // .openPopup();
+  );
+
+  if (loggedIn) {
+    popupContent += `<button onclick="removeMarker(${marker._leaflet_id}, ${point.id})">Remove Point</button>`;
+  }
+
+  marker.setPopupContent(popupContent);
 };
 
-const removeMarker = (marker) => {
+const removeMarker = (marker, point) => {
+  console.log(marker, point);
+
   map.eachLayer((layer) => {
     if (layer._leaflet_id === marker) map.removeLayer(layer);
   });
@@ -67,6 +90,8 @@ const addPoints = (map_id) => {
       map.fitBounds(group.getBounds());
     })
     .fail((err) => console.log(err));
+
+  $("#map").data({ map_id });
 };
 
 const listMaps = () => {
@@ -84,16 +109,32 @@ const createMapsList = (maps) => {
     $(`<li class="map" id=${map.id}>`)
       .text(map.name)
       .appendTo($mapsList)
-      .on("click", handleMapClick);
+      .on("click", handleMapListClick);
   });
 };
 
-const handleMapClick = (e) => {
+const handleMapListClick = (e) => {
   console.log(e.target.id);
   addPoints(e.target.id);
+};
+
+const handlePointFormSubmit = (e) => {
+  e.preventDefault();
+  console.log("submit form");
+
+  console.log(e);
+};
+
+const handlePointFormReset = (e) => {
+  e.preventDefault();
+  console.log("reset form");
+  $("#point-form").addClass("hidden");
+  console.log(e);
 };
 
 $(() => {
   getPosition();
   listMaps();
+  $("#point-form").on("submit", handlePointFormSubmit);
+  $("#point-form").on("reset", handlePointFormReset);
 });
