@@ -28,19 +28,25 @@ const loadMap = (position) => {
 };
 
 const renderPointMarker = (point) => {
-  L.marker(Object.values(point.coords), { title: point.title })
-    .addTo(map)
-    .bindPopup(
-      L.popup({
-        maxWidth: 250,
-        minWidth: 100,
-        autoClose: false,
-        closeOnClick: false,
-        className: `point-popup`,
-      })
-    )
-    .setPopupContent(`${point.image_url}<span>${point.description}</span`);
+  const marker = L.marker(Object.values(point.coords), { title: point.title });
+  marker.addTo(map).bindPopup(
+    L.popup({
+      maxWidth: 250,
+      minWidth: 100,
+      autoClose: false,
+      closeOnClick: false,
+      className: `point-popup`,
+    })
+  ).setPopupContent(`
+    ${point.image_url}<span>${point.description}</span>
+    <button onclick="removeMarker(${marker._leaflet_id})">Remove Point</button>`);
   // .openPopup();
+};
+
+const removeMarker = (marker) => {
+  map.eachLayer((layer) => {
+    if (layer._leaflet_id === marker) map.removeLayer(layer);
+  });
 };
 
 const clearMap = () => {

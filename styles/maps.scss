@@ -14,12 +14,33 @@ i {
   margin-right: 10px;
 }
 
-#maps-list {
+#maplist-container {
   position: absolute;
   top: 10%;
+  left: 1%;
   z-index: 9999;
+  padding-right: 40px;
 }
 
-#maps-list:hover {
-  cursor: pointer;
+#maps-list {
+  opacity: 50%;
+  list-style: none;
 }
+
+#maps-list li {
+  margin: 10px;
+}
+
+#maplist-container:hover #maps-list {
+  cursor: pointer;
+  opacity: 100%;
+}
+
+#maplist-container:hover {
+  background-color: white;
+}
+
+// #maplist-container:hover #maps-list {
+//   visibility: visible;
+//   background-color: white;
+// }
