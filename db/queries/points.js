@@ -46,4 +46,10 @@ const addPoint = ({
     });
 };
 
-module.exports = { getAllPoints, getPointsByMapId, addPoint };
+const deletePointbyId = (id) => {
+  return db.query("DELETE FROM points WHERE id=$1;", [id]).then(() => {
+    return "point sent to database";
+  });
+};
+
+module.exports = { getAllPoints, getPointsByMapId, addPoint, deletePointbyId };

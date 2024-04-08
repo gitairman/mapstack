@@ -39,7 +39,13 @@ router.get("/:id", (req, res) => {
 router.post("/", (req, res) => {
   console.log(req.body);
   const data = req.body;
-  pointQueries.addPoint(data).then((result) => console.log(result));
+  pointQueries.addPoint(data).then((result) => res.send(result));
+});
+
+router.delete("/:id", (req, res) => {
+  const id = Number(req.params.id);
+  console.log("delete marker");
+  pointQueries.deletePointbyId(id).then((result) => res.send(result));
 });
 
 module.exports = router;

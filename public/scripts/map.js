@@ -51,7 +51,9 @@ const renderPointMarker = (point) => {
   let popupContent = `
   <div class='point-details'>
   <h4 class='point-title'>${point.title}</h4>
-  <img class='point-image' src=${point.image_url} /><p class='point-description' >${point.description}</p>
+  ${
+    point.image_url ? `<img class='point-image' src=${point.image_url} />` : ""
+  }<p class='point-description' >${point.description}</p>
   </div>
   `;
 
@@ -79,12 +81,21 @@ const renderPointMarker = (point) => {
     .openTooltip();
 };
 
-const removeMarker = (marker, point) => {
-  console.log(marker, point);
+const removeMarker = (marker, point_id) => {
+  console.log(marker, point_id);
 
-  map.eachLayer((layer) => {
-    if (layer._leaflet_id === marker) map.removeLayer(layer);
-  });
+  $.ajax(`/api/points/${point_id}`, {
+    method: "DELETE",
+  })
+    .done((result) => {
+      console.log(result);
+      addPoints($("#map").data("map_id"));
+    })
+    .fail((err) => console.log(err));
+
+  // map.eachLayer((layer) => {
+  //   if (layer._leaflet_id === marker) map.removeLayer(layer);
+  // });
 };
 
 const clearMap = () => {
@@ -151,7 +162,14 @@ const handlePointFormSubmit = (e) => {
     $("#point-title").trigger("focus");
   }
 
-  $.post("/api/points", point).done().fail();
+  $pointForm.addClass("hidden");
+
+  $.post("/api/points", point)
+    .done((result) => {
+      console.log(result);
+      addPoints($("#map").data("map_id"));
+    })
+    .fail((err) => console.log(err));
 };
 
 const handlePointFormReset = (e) => {
