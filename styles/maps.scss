@@ -51,11 +51,39 @@ i {
   z-index: 9999;
   position: absolute;
   border: solid black 2px;
-  border-radius: 5%;
+  border-radius: 10px;
   background-color: blue;
   padding: 10px;
 }
 
 #point-form.hidden {
   display: none;
+}
+
+.hidden {
+  display: none;
+}
+
+.point-image {
+  width: 4rem;
+  height: 4rem;
+  margin-right: 1rem;
+}
+
+.point-details {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.point-title {
+  width: 100%;
+  margin: 0;
+  margin-bottom: 0.25rem;
+}
+
+.point-description {
+  margin: 0;
+  max-width: 65%;
 }

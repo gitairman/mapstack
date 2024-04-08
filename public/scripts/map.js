@@ -44,7 +44,12 @@ const loadMap = (position) => {
 };
 
 const renderPointMarker = (point) => {
-  let popupContent = `${point.image_url}<span>${point.description}</span>`;
+  let popupContent = `
+  <div class='point-details'>
+  <h4 class='point-title'>${point.title}</h4>
+  <img class='point-image' src=${point.image_url} /><p class='point-description' >${point.description}</p>
+  </div>
+  `;
 
   const marker = L.marker(Object.values(point.coords), { title: point.title });
   marker.addTo(map).bindPopup(
@@ -62,6 +67,12 @@ const renderPointMarker = (point) => {
   }
 
   marker.setPopupContent(popupContent);
+  marker
+    .bindTooltip(point.title, {
+      offset: [-16, -15],
+      direction: "top",
+    })
+    .openTooltip();
 };
 
 const removeMarker = (marker, point) => {

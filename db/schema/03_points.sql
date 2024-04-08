@@ -4,7 +4,7 @@ CREATE TABLE points (
   coords POINT  NOT NULL,
   title VARCHAR(255) NOT NULL,
   description VARCHAR(255),
-  image_url VARCHAR(255) NOT NULL,
+  image_url VARCHAR(255),
   map_id INTEGER NOT NULL REFERENCES maps(id),
   added_by INTEGER NOT NULL REFERENCES users(id)
 );
