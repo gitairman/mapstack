@@ -137,8 +137,19 @@ const handlePointFormSubmit = (e) => {
   e.preventDefault();
   const $pointForm = $("#point-form");
   const newPointCoords = $pointForm.data("coords");
-  console.log("submit form");
-  console.log(newPointCoords);
+  const pointDetails = $pointForm.serializeArray();
+  const point = pointDetails.reduce((a, { name, value }) => {
+    a[name] = value;
+    return a;
+  }, {});
+  point.coords = [newPointCoords.lat, newPointCoords.lng];
+  point.map_id = $("#map").data("map_id");
+  point.added_by = 1; // user_id of logged in user to go here
+  console.log(point);
+  if (!point.title) {
+    $("#no-title-error").removeClass("hidden");
+    $("#point-title").trigger("focus");
+  }
 
   console.log(e);
 };
@@ -166,10 +177,15 @@ const handleMapLoaded = () => {
   listMaps();
 };
 
+const handlePointFormInput = (e) => {
+  $("#no-title-error").addClass("hidden");
+};
+
 $(() => {
   // getPosition();
   loadMap({ coords: { latitude: 50.0760328, longitude: -123.0367918 } });
   $("#point-form").on("submit", handlePointFormSubmit);
   $("#point-form").on("reset", handlePointFormReset);
   $("#point-form").on("focusout", handlePointFormLosingFocus);
+  $("#point-form").on("input", handlePointFormInput);
 });

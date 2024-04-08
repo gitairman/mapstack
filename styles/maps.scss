@@ -3,6 +3,10 @@ body {
   padding: 0;
 }
 
+p {
+  margin: 0;
+}
+
 #map {
   position: absolute;
   top: 0;
@@ -51,8 +55,8 @@ i {
   z-index: 9999;
   position: absolute;
   border: solid black 2px;
-  border-radius: 10px;
-  background-color: blue;
+  border-radius: 0 10px 10px 10px;
+  background-color: lightblue;
   padding: 10px;
 }
 
@@ -86,4 +90,11 @@ i {
 .point-description {
   margin: 0;
   max-width: 65%;
+}
+
+#no-title-error {
+  color: red;
+  background-color: lightpink;
+  margin: 0;
+  border: solid red 2px;
 }
