@@ -17,6 +17,8 @@ const handleMapClick = (e) => {
   console.log("you clicked on the map");
   // const $markerPane = $(".leaflet-marker-pane");
   const $pointForm = $("#point-form");
+  $pointForm[0].reset();
+  $pointForm.data("coords", e.latlng);
   $pointForm
     .css("top", e.layerPoint.y)
     .css("left", e.layerPoint.x)
@@ -30,10 +32,11 @@ const loadMap = (position) => {
   const { longitude } = position.coords;
 
   const coords = [latitude, longitude];
+  console.log(coords);
 
   map = L.map("map").setView(coords, 13);
 
-  L.tileLayer("https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png", {
+  L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(map);
@@ -41,6 +44,7 @@ const loadMap = (position) => {
 
   // Handling clicks on map
   map.on("click", handleMapClick);
+  map.whenReady(handleMapLoaded);
 };
 
 const renderPointMarker = (point) => {
@@ -131,21 +135,41 @@ const handleMapListClick = (e) => {
 
 const handlePointFormSubmit = (e) => {
   e.preventDefault();
+  const $pointForm = $("#point-form");
+  const newPointCoords = $pointForm.data("coords");
   console.log("submit form");
+  console.log(newPointCoords);
 
   console.log(e);
 };
 
 const handlePointFormReset = (e) => {
-  e.preventDefault();
+  const $pointForm = $(e.currentTarget);
   console.log("reset form");
-  $("#point-form").addClass("hidden");
-  console.log(e);
+  $pointForm.addClass("hidden");
+};
+
+const handlePointFormLosingFocus = (e) => {
+  const $pointForm = $(e.currentTarget);
+
+  setTimeout(() => {
+    if ($pointForm.find(":focus").length === 0) {
+      // Focus has moved outside the parent element
+      $pointForm.addClass("hidden");
+    } else {
+      // Focus has moved to another element within the parent element
+    }
+  }, 50);
+};
+
+const handleMapLoaded = () => {
+  listMaps();
 };
 
 $(() => {
-  getPosition();
-  listMaps();
+  // getPosition();
+  loadMap({ coords: { latitude: 50.0760328, longitude: -123.0367918 } });
   $("#point-form").on("submit", handlePointFormSubmit);
   $("#point-form").on("reset", handlePointFormReset);
+  $("#point-form").on("focusout", handlePointFormLosingFocus);
 });
