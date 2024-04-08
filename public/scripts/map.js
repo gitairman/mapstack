@@ -151,7 +151,7 @@ const handlePointFormSubmit = (e) => {
     $("#point-title").trigger("focus");
   }
 
-  console.log(e);
+  $.post("/api/points", point).done().fail();
 };
 
 const handlePointFormReset = (e) => {

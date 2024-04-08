@@ -18,4 +18,32 @@ const getPointsByMapId = (id) => {
     });
 };
 
-module.exports = { getAllPoints, getPointsByMapId };
+const addPoint = ({
+  coords,
+  title,
+  description,
+  image_url,
+  map_id,
+  added_by,
+}) => {
+  const pData = [
+    `(${Number(coords[0])}, ${Number(coords[1])})`,
+    title,
+    description,
+    image_url,
+    Number(map_id),
+    Number(added_by),
+  ];
+  console.log(pData);
+
+  return db
+    .query(
+      "INSERT INTO points (coords, title, description, image_url, map_id, added_by) VALUES ($1, $2, $3, $4, $5, $6);",
+      [...pData]
+    )
+    .then(() => {
+      return "point sent to database";
+    });
+};
+
+module.exports = { getAllPoints, getPointsByMapId, addPoint };

@@ -36,4 +36,10 @@ router.get("/:id", (req, res) => {
     });
 });
 
+router.post("/", (req, res) => {
+  console.log(req.body);
+  const data = req.body;
+  pointQueries.addPoint(data).then((result) => console.log(result));
+});
+
 module.exports = router;
