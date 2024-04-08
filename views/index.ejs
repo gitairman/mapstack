@@ -18,21 +18,27 @@
 </head>
 
 <body>
-  <h1>mapstack</h1>
-  <!-- get route to render "/maps"-->
-  <form method="GET" action="/maps">
-    <button type="submit">Ondelé -> maps</button>
-  </form>
+  <div id="typewriter-output">
+  <script src="scripts/typewriter.js"></script>
+  <script>
+      typewriter('Welcome to Mapstack', 110);
+  </script>
+  </div>
 
-  <!-- get route to render "/login"-->
-  <form method="GET" action="/login">
-		<button type="submit">Login</button>
-	</form>
+  <div class="directory">
+    <form method="GET" action="/maps">
+      <button type="submit" id="btn-maps">View Public Maps</button>
+    </form>
 
-   <!-- get route to render "/register"-->
-   <form method="GET" action="/register">
-		<button type="submit">register</button>
-	</form>
+    <form method="GET" action="/login">
+      <button type="submit" id="btn-sign-in">Sign in</button>
+    </form>
+
+    <form method="GET" action="/register">
+      <button type="submit" id="btn-register">Register</button>
+    </form>
+  </div>
+
 </body>
 
 </html>

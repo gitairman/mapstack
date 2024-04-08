@@ -3,16 +3,41 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: 100vh;
+  height: 100vh;
 
-  background: rgb(163, 208, 219);
-  background: linear-gradient(
-    227deg,
-    rgba(163, 208, 219, 1) 0%,
-    rgba(163, 176, 219, 1) 20%,
-    rgba(163, 173, 219, 1) 34%,
-    rgba(163, 219, 208, 1) 59%,
-    rgba(163, 208, 219, 1) 74%,
-    rgba(163, 208, 219, 1) 100%
-  );
+  //background-image: url('https://arthurholmer.com/wp-content/uploads/2019/08/Parking-Garages-Near-Luries-Children-Hospital.jpg');
 }
+
+// .directory {
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+// 	flex-direction: column;
+// 	background-color: lightblue;
+//   border-radius: 3%;
+// 	width: 30vw;
+// 	height: 25vw;
+// }
+
+// #btn-maps,
+// #btn-sign-in,
+// #btn-register {
+// 	background-color: transparent;
+// 	color: white;
+// 	border: 2px solid white;
+// 	margin: 0.7em;
+// 	padding: .3em;
+
+// 	border-top-left-radius: 20px;
+// 	border-top-right-radius: 20px;
+
+// 	border-bottom-left-radius: 20px;
+// 	border-bottom-right-radius: 20px;
+
+// 	width: 25vw;
+
+//   &:hover {
+//     color: blue;
+//     cursor: pointer;
+//   }
+// }

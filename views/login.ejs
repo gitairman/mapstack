@@ -12,16 +12,22 @@
 	<link rel="stylesheet" href="/vendor/border-box.css" />
 	<link rel="stylesheet" href="/styles/main.css" />
 	<link rel="stylesheet" href="/styles/layout.css" />
+	<link rel="stylesheet" href="/styles/login.css" />
 
 	<script src="/vendor/jquery-3.0.0.js"></script>
 	<!-- <script defer src=""></script> -->
 </head>
 
 <body>
-	<h1>Login</h1>
-	<input type="email" name="email" placeholder="Enter your email" id="email">
-	<input type="password" name="password" placeholder="Enter your password" id="password">
-	<button type="submit" class="btn btn-pink">Log in</button>
+
+	<span class="container">
+		<form method="POST" action="/login">
+			<input type="text" name="username" placeholder="Username" id="username">
+			<input type="text" name="password" placeholder="Password" id="password">
+			<button type="submit" class="btn-sign-in">Sign in</button>
+		</form>
+	</span>
+
 </body>
 
 </html>
