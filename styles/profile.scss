@@ -1,0 +1,30 @@
+body {
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+	text-align: center;
+	background-color: lightblue;
+
+	.favourites {
+		background-color: blue;
+		width: 20vw;
+		height: 50vh;
+		border-radius: 5%;
+	}
+
+	.contributed {
+		background-color: blue;
+		width: 20vw;
+		height: 50vh;
+	}
+
+	.all-maps {
+		background-color: blue;
+		width: 20vw;
+		height: 50vh;
+
+		&:hover {
+			box-shadow: white;
+		}
+	}
+}
