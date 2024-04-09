@@ -38,7 +38,11 @@ router.post("/", (req, res) => {
 
   mapQueries
     .addMap(map_name)
-    .then((result) => console.log(result))
+    .then((result) => {
+      console.log("result in maps-api", result);
+
+      res.send(result);
+    })
     .catch((err) => {
       res.status(500).json({ error: err.message });
     });

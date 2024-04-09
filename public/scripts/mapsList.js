@@ -8,23 +8,29 @@ const handleCreateNewMap = (e) => {
   const map_name = $(e.target).serializeArray()[0].value;
   console.log(map_name);
 
-  $.post("/api/maps", { map_name }).done().fail();
+  $.post("/api/maps", { map_name })
+    .done((result) => {
+      console.log("result in handleCreateNewMap", result);
+      const id = result.id;
+      console.log(typeof id);
+      $(location).attr("href", `/maps/${id}`);
+      // listMaps().then(() => $(`#map-${id}`).trigger("click"));
+    })
+    .fail((err) => console.log(err));
 };
 
 const listMaps = () => {
-  $.get(`/api/maps`).done(({ maps }) => {
+  return $.get(`/api/maps`).done(({ maps }) => {
     createMapsList(maps);
   });
 };
 
 const createMapsList = (maps) => {
-  console.log(maps);
-
   const $mapsList = $("#maps-list");
   $mapsList.empty();
   maps.forEach((map) => {
     $(
-      `<li class="map" id=${map.id}><a href=${`/maps/${map.id}`}>${
+      `<li class="map" ><a id=${`map-${map.id}`} href=${`/maps/${map.id}`}>${
         map.name
       }</a></li>`
     )

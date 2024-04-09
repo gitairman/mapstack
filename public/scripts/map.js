@@ -107,6 +107,8 @@ const addPoints = (map_id) => {
       points.forEach((point) => {
         renderPointMarker(point);
       });
+      if (points.length === 0) return;
+
       const group = new L.featureGroup(Object.values(map._layers).slice(1));
       map.fitBounds(group.getBounds());
     })

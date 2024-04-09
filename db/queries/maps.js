@@ -25,11 +25,13 @@ const addMap = (map_name) => {
 
   return db
     .query(
-      "INSERT INTO maps (name, description, created_by) VALUES ($1, $2, $3);",
+      "INSERT INTO maps (name, description, created_by) VALUES ($1, $2, $3) RETURNING *;",
       [map_name, map_desc, created_by]
     )
-    .then(() => {
-      return "added map to database";
+    .then((data) => {
+      // console.log(data.rows);
+
+      return data.rows[0];
     });
 };
 
