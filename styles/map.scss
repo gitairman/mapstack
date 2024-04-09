@@ -64,6 +64,21 @@ i {
   display: none;
 }
 
+#edit-form {
+  display: flex;
+  flex-direction: column;
+  z-index: 9999;
+  // position: absolute;
+  border: solid black 2px;
+  border-radius: 0 10px 10px 10px;
+  background-color: lightsalmon;
+  padding: 10px;
+}
+
+#edit-form.hidden {
+  display: none;
+}
+
 .hidden {
   display: none;
 }
@@ -72,6 +87,10 @@ i {
   width: 4rem;
   height: 4rem;
   margin-right: 1rem;
+}
+
+.point-image:hover {
+  transform: scale(5);
 }
 
 .point-details {

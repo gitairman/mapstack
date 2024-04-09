@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Leaflet with NPM</title>
-    <link rel="stylesheet" href="/styles/maps.css" />
+    <link rel="stylesheet" href="/styles/map.css" />
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
@@ -53,6 +53,26 @@
       />
       <div>
         <button type="submit">Add Point</button>
+        <input type="reset" id="cancel-point" value="Cancel" />
+      </div>
+    </form>
+    <form id="edit-form" class="hidden">
+      <p>Edit Point</p>
+      <p id="no-title-error" class="hidden">Point must have a title!</p>
+      <input id="point-title" name="title" type="text" placeholder="title" />
+      <textarea
+        name="description"
+        type="text"
+        placeholder="description"
+      ></textarea>
+      <input
+        id="point-img-url"
+        name="image_url"
+        type="text"
+        placeholder="image url"
+      />
+      <div>
+        <button type="submit">Edit Point</button>
         <input type="reset" id="cancel-point" value="Cancel" />
       </div>
     </form>

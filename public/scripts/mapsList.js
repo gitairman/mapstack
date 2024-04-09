@@ -10,11 +10,8 @@ const handleCreateNewMap = (e) => {
 
   $.post("/api/maps", { map_name })
     .done((result) => {
-      console.log("result in handleCreateNewMap", result);
       const id = result.id;
-      console.log(typeof id);
       $(location).attr("href", `/maps/${id}`);
-      // listMaps().then(() => $(`#map-${id}`).trigger("click"));
     })
     .fail((err) => console.log(err));
 };

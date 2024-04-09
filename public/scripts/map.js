@@ -4,7 +4,8 @@ let loggedIn = true;
 const getPosition = () => {
   if (navigator.geolocation)
     navigator.geolocation.getCurrentPosition(loadMap, function () {
-      alert("Could not get your position");
+      alert("Could not get your position, defaulting to Whistler, BC");
+      loadMap({ coords: { latitude: 50.0760328, longitude: -123.0367918 } });
     });
 };
 
@@ -68,10 +69,15 @@ const renderPointMarker = (point) => {
   );
 
   if (loggedIn) {
-    popupContent += `<button onclick="removeMarker(${marker._leaflet_id}, ${point.id})">Remove Point</button>`;
+    popupContent += `
+    <button id=${`delete-${point.id}`} >Remove Point</button>
+    <button id=${`edit-${point.id}`} >Edit Point</button>
+    `;
   }
 
-  marker.setPopupContent(popupContent);
+  marker.setPopupContent(
+    `<div id=${`popup-point-${point.id}`}>${popupContent}</div>`
+  );
   marker
     .bindTooltip(point.title, {
       offset: [-16, -15],
@@ -80,8 +86,16 @@ const renderPointMarker = (point) => {
     .openTooltip();
 };
 
-const removeMarker = (marker, point_id) => {
-  console.log(marker, point_id);
+const handlePopupClick = (e) => {
+  console.log(e.target);
+  const [action, point_id] = e.target.id.split("-");
+  if (action === "delete") return removeMarker(Number(point_id));
+  if (action === "edit")
+    return editMarker($(e.target).siblings(".point-details").children());
+};
+
+const removeMarker = (point_id) => {
+  // console.log(point_id);
 
   $.ajax(`/api/points/${point_id}`, {
     method: "DELETE",
@@ -91,6 +105,35 @@ const removeMarker = (marker, point_id) => {
       addPoints($("#map").data("map_id"));
     })
     .fail((err) => console.log(err));
+};
+
+const editMarker = ($pointDetails) => {
+  console.log($pointDetails);
+  const { 0: titleEl, 1: imgEl, 2: descriptionEl } = $pointDetails;
+  const title = titleEl.innerText;
+  const image_url = imgEl.src;
+  const description = descriptionEl.innerText;
+
+  const $editForm = $("#edit-form");
+  console.log($editForm);
+
+  $editForm[0][0].value = title;
+  $editForm[0][1].value = description;
+  $editForm[0][2].value = image_url;
+  const $popupBox = $pointDetails.closest(".leaflet-popup-content");
+  console.log($editForm);
+
+  $editForm.prependTo($popupBox);
+  $editForm.removeClass("hidden");
+  $editForm.siblings().addClass("hidden");
+
+  // $editForm[0].reset();
+  // $editForm
+  //   .css("top", e.containerPoint.y)
+  //   .css("left", e.containerPoint.x)
+  //   .removeClass("hidden");
+
+  // $("#point-title").trigger("focus");
 };
 
 const clearMap = () => {
@@ -111,6 +154,7 @@ const addPoints = (map_id) => {
 
       const group = new L.featureGroup(Object.values(map._layers).slice(1));
       map.fitBounds(group.getBounds());
+      $(".leaflet-popup-pane").on("click", handlePopupClick);
     })
     .fail((err) => console.log(err));
 
@@ -138,6 +182,7 @@ const handlePointFormSubmit = (e) => {
   if (!point.title) {
     $("#no-title-error").removeClass("hidden");
     $("#point-title").trigger("focus");
+    return;
   }
 
   $pointForm.addClass("hidden");
@@ -150,19 +195,25 @@ const handlePointFormSubmit = (e) => {
     .fail((err) => console.log(err));
 };
 
-const handlePointFormReset = (e) => {
+const handleEditFormSubmit = (e) => {
+  e.preventDefault();
+};
+
+const handleFormReset = (e) => {
   const $pointForm = $(e.currentTarget);
   console.log("reset form");
   $pointForm.addClass("hidden");
+  $pointForm.prependTo($("body"));
 };
 
-const handlePointFormLosingFocus = (e) => {
+const handleFormLosingFocus = (e) => {
   const $pointForm = $(e.currentTarget);
 
   setTimeout(() => {
     if ($pointForm.find(":focus").length === 0) {
       // Focus has moved outside the parent element
       $pointForm.addClass("hidden");
+      $pointForm.prependTo($("body"));
     } else {
       // Focus has moved to another element within the parent element
     }
@@ -177,15 +228,27 @@ const handleMapLoaded = () => {
   addPoints(map_id);
 };
 
-const handlePointFormInput = (e) => {
-  $("#no-title-error").addClass("hidden");
+const handleFormInput = (e) => {
+  const $pointForm = $(e.currentTarget);
+  const $errorEl = $pointForm.find("#no-title-error");
+  $errorEl.addClass("hidden");
+};
+
+const initializeElements = () => {
+  const $newPointForm = $("#point-form");
+  $newPointForm.on("submit", handlePointFormSubmit);
+  $newPointForm.on("reset", handleFormReset);
+  $newPointForm.on("focusout", handleFormLosingFocus);
+  $newPointForm.on("input", handleFormInput);
+
+  const $editPointForm = $("#edit-form");
+  $editPointForm.on("submit", handleEditFormSubmit);
+  $editPointForm.on("reset", handleFormReset);
+  $editPointForm.on("focusout", handleFormLosingFocus);
+  $editPointForm.on("input", handleFormInput);
 };
 
 $(() => {
-  // getPosition();
   loadMap({ coords: { latitude: 50.0760328, longitude: -123.0367918 } });
-  $("#point-form").on("submit", handlePointFormSubmit);
-  $("#point-form").on("reset", handlePointFormReset);
-  $("#point-form").on("focusout", handlePointFormLosingFocus);
-  $("#point-form").on("input", handlePointFormInput);
+  initializeElements();
 });
