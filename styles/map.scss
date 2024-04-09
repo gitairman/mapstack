@@ -68,11 +68,14 @@ i {
   display: flex;
   flex-direction: column;
   z-index: 9999;
-  // position: absolute;
   border: solid black 2px;
   border-radius: 0 10px 10px 10px;
   background-color: lightsalmon;
   padding: 10px;
+}
+
+#edit-form p {
+  margin: 0;
 }
 
 #edit-form.hidden {

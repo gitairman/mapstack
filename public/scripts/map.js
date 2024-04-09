@@ -50,7 +50,7 @@ const loadMap = (position) => {
 const renderPointMarker = (point) => {
   let popupContent = `
   <div class='point-details'>
-  <h4 class='point-title'>${point.title}</h4>
+  <h4 id=${`point-title-${point.id}`} class='point-title'>${point.title}</h4>
   ${
     point.image_url ? `<img class='point-image' src=${point.image_url} />` : ""
   }<p class='point-description' >${point.description}</p>
@@ -113,6 +113,7 @@ const editMarker = ($pointDetails) => {
   const title = titleEl.innerText;
   const image_url = imgEl.src;
   const description = descriptionEl.innerText;
+  const point_id = Number(titleEl.id.split("-")[2]);
 
   const $editForm = $("#edit-form");
   console.log($editForm);
@@ -126,7 +127,7 @@ const editMarker = ($pointDetails) => {
   $editForm.prependTo($popupBox);
   $editForm.removeClass("hidden");
   $editForm.siblings().addClass("hidden");
-
+  $editForm.data("point_id", point_id);
   // $editForm[0].reset();
   // $editForm
   //   .css("top", e.containerPoint.y)
@@ -197,12 +198,42 @@ const handlePointFormSubmit = (e) => {
 
 const handleEditFormSubmit = (e) => {
   e.preventDefault();
+  console.log(e);
+  const $pointForm = $(e.target);
+  const point_id = $pointForm.data("point_id");
+
+  const pointDetails = $pointForm.serializeArray();
+  const point = pointDetails.reduce((a, { name, value }) => {
+    a[name] = value;
+    return a;
+  }, {});
+  point.map_id = $("#map").data("map_id");
+  point.added_by = 1; // user_id of logged in user to go here
+  console.log(point);
+  if (!point.title) {
+    $pointForm.children("#no-title-error").removeClass("hidden");
+    $pointForm.children("#point-title").trigger("focus");
+    return;
+  }
+
+  $pointForm.addClass("hidden");
+
+  $.ajax(`/api/points/${point_id}`, {
+    method: "PATCH",
+    data: point,
+  })
+    .done((result) => {
+      console.log(result);
+      addPoints($("#map").data("map_id"));
+    })
+    .fail((err) => console.log(err));
 };
 
 const handleFormReset = (e) => {
   const $pointForm = $(e.currentTarget);
   console.log("reset form");
   $pointForm.addClass("hidden");
+  $pointForm.siblings("div").removeClass("hidden");
   $pointForm.prependTo($("body"));
 };
 
@@ -213,6 +244,7 @@ const handleFormLosingFocus = (e) => {
     if ($pointForm.find(":focus").length === 0) {
       // Focus has moved outside the parent element
       $pointForm.addClass("hidden");
+      $pointForm.siblings("div").removeClass("hidden");
       $pointForm.prependTo($("body"));
     } else {
       // Focus has moved to another element within the parent element

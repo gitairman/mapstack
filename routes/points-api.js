@@ -10,8 +10,6 @@ const router = express.Router();
 const pointQueries = require("../db/queries/points");
 
 router.get("/", (req, res) => {
-  // console.log("inside points-api get / ");
-
   pointQueries
     .getAllPoints()
     .then((points) => {
@@ -24,7 +22,6 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
-
   pointQueries
     .getPointsByMapId(id)
     .then((points) => {
@@ -36,15 +33,25 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log(req.body);
   const data = req.body;
   pointQueries.addPoint(data).then((result) => res.send(result));
+});
+
+router.patch("/:id", (req, res) => {
+  const id = req.params.id;
+  pointQueries
+    .updatePointById(id, req.body)
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
 });
 
 router.delete("/:id", (req, res) => {
   const id = Number(req.params.id);
   console.log("delete marker");
-  pointQueries.deletePointbyId(id).then((result) => res.send(result));
+  pointQueries
+    .deletePointbyId(id)
+    .then((result) => res.send(result))
+    .catch((err) => console.log(err));
 });
 
 module.exports = router;
