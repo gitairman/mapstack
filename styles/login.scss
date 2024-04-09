@@ -1,43 +1,43 @@
-// .container {
-// 	display: flex;
-// 	justify-content: center;
-// 	align-items: center;
-// 	flex-direction: column;
-// 	background-color: lightblue;
-// 	border-radius: 3%;
-// 	width: 30vw;
-// 	height: 25vw;
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+	background-color: lightblue;
+	border-radius: 3%;
+	width: 30vw;
+	height: 25vw;
 
-// 	#username,
-// 	#password {
-// 		background-color: transparent;
-// 		color: white;
-// 		border: 1px solid white;
-// 		margin: 0.7em;
-// 		padding: .3em;
+	#username,
+	#password {
+		background-color: transparent;
+		color: white;
+		border: 1px solid white;
+		margin: 0.7em;
+		padding: .3em;
 
-// 		border-top-left-radius: 20px;
-// 		border-top-right-radius: 20px;
+		border-top-left-radius: 20px;
+		border-top-right-radius: 20px;
 
-// 		border-bottom-left-radius: 20px;
-// 		border-bottom-right-radius: 20px;
+		border-bottom-left-radius: 20px;
+		border-bottom-right-radius: 20px;
 
-// 		width: 25vw;
-// 	}
-// 		:hover {
-// 			color: white;
-// 		}
+		width: 25vw;
+	}
+		:hover {
+			color: white;
+		}
 
-// 	.btn-sign-in {
-// 		background-color: transparent;
-// 		color: white;
-// 		border: 1px solid white;
-// 		padding: 0.3em;
-// 		margin-top: 2em;
+	.btn-sign-in {
+		background-color: transparent;
+		color: white;
+		border: 1px solid white;
+		padding: 0.3em;
+		margin-top: 2em;
 
-// 		:hover {
-// 			color: white;
-// 			cursor: pointer;
-// 		}
-// 	}
-// }
+		:hover {
+			color: white;
+			cursor: pointer;
+		}
+	}
+}

@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
 
 	userQueries.newUser(username, hashedPassword)
 		.then(() => {
-			console.log('money')
+			req.session.username = username
 			return res.redirect('/profile')
 		})
 		.catch((err) => {

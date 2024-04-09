@@ -1,0 +1,31 @@
+<header class="nav">
+  <nav class="navbar navbar-expand-md" style="background-color: lightblue">
+    <span class="navbar-toggler-icon"></span>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <div class="navbar-nav">
+        <a class="navbar-brand" href="/maps">Maps</a>
+      </div>
+    </div>
+
+    <div class="navbar-collapse flex-row-reverse mr-auto">
+      <% if (typeof username !=="undefined" ) { %>
+        <span class="navbar-text">Logged in as <%= username %></span>
+        <form method="POST" action="/logout">
+          <button type="submit" class="btn btn-light mr-2">Log out</button>
+        </form>
+        <% } else { %>
+          <form method="GET" action="/login">
+            <button type="submit" class="btn btn-light mr-2">Log in</button>
+          </form>
+          <form method="GET" action="/register">
+            <button type="submit" class="btn btn-light mr-2">Register</button>
+          </form>
+          <% } %>
+    </div>
+  </nav>
+</header>

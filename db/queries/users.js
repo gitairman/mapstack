@@ -25,7 +25,6 @@ const checkUsers = (username, password) => {
 };
 
 const newUser = (username, hashedPassword) => {
-  console.log('money');
   return db.query(`INSERT INTO users (username, password) 
   VALUES ($1, $2)`,
     [username, hashedPassword]
