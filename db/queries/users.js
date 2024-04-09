@@ -1,5 +1,5 @@
 const db = require('../connection');
-const bcrypt = require('bcrypt')
+const bcrypt = require('bcrypt');
 
 const getUsers = () => {
   return db.query('SELECT * FROM users;')
@@ -7,11 +7,6 @@ const getUsers = () => {
       return data.rows;
     });
 };
-
-// const newUser = (username, password) => {
-//   const hashedPassword = hashPassword(password, 10)
-//   return db.query('INSERT INTO users (username, password) VALUES ($1, $2)', [username, hashedPassword])
-// }
 
 const checkUsers = (username, password) => {
   return db.query('SELECT username, password FROM users WHERE username = $1', [username])
@@ -23,10 +18,22 @@ const checkUsers = (username, password) => {
       if (dbPassword === password) {
         return true;
       }
-      // console.log(username, password)
-      console.log('hi');
     })
     .catch(err => {
+      console.error(err);
+    });
+};
+
+const newUser = (username, hashedPassword) => {
+  console.log('money');
+  return db.query(`INSERT INTO users (username, password) 
+  VALUES ($1, $2)`,
+    [username, hashedPassword]
+  )
+    .then(() => {
+      return true;
+    })
+    .catch((err) => {
       console.error(err);
     });
 };
