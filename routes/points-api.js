@@ -10,7 +10,7 @@ const router = express.Router();
 const pointQueries = require("../db/queries/points");
 
 router.get("/", (req, res) => {
-  console.log("hello");
+  // console.log("inside points-api get / ");
 
   pointQueries
     .getAllPoints()
@@ -24,7 +24,6 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
-  console.log("hello");
 
   pointQueries
     .getPointsByMapId(id)

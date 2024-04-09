@@ -1,7 +1,7 @@
 const db = require("../connection");
 
 const getAllMaps = () => {
-  console.log("hello from getPoints function");
+  // console.log("inside getAllMaps function");
 
   return db.query("SELECT * FROM maps;").then((data) => {
     console.log(data.rows);
@@ -18,4 +18,19 @@ const getMapById = (id) => {
     });
 };
 
-module.exports = { getAllMaps, getMapById };
+const addMap = (map_name) => {
+  console.log(map_name);
+  const map_desc = "testing";
+  const created_by = 1;
+
+  return db
+    .query(
+      "INSERT INTO maps (name, description, created_by) VALUES ($1, $2, $3);",
+      [map_name, map_desc, created_by]
+    )
+    .then(() => {
+      return "added map to database";
+    });
+};
+
+module.exports = { getAllMaps, getMapById, addMap };

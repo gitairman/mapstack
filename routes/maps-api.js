@@ -10,8 +10,6 @@ const router = express.Router();
 const mapQueries = require("../db/queries/maps");
 
 router.get("/", (req, res) => {
-  console.log("hello");
-
   mapQueries
     .getAllMaps()
     .then((maps) => {
@@ -24,13 +22,23 @@ router.get("/", (req, res) => {
 
 router.get("/:id", (req, res) => {
   const id = req.params.id;
-  console.log("hello");
 
   mapQueries
     .getMapById(id)
     .then((map) => {
       res.json({ map });
     })
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+router.post("/", (req, res) => {
+  const { map_name } = req.body;
+
+  mapQueries
+    .addMap(map_name)
+    .then((result) => console.log(result))
     .catch((err) => {
       res.status(500).json({ error: err.message });
     });

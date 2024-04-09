@@ -10,8 +10,6 @@ const router = express.Router();
 const userQueries = require("../db/queries/users");
 
 router.get("/", (req, res) => {
-  console.log("hello from users api");
-
   userQueries
     .getUsers()
     .then((users) => {

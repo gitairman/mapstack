@@ -9,7 +9,13 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("map");
+  res.render("mapsList");
+});
+router.get("/:id", (req, res) => {
+  console.log("rendering map by id");
+  const map_id = req.params.id;
+  const templateVars = { map_id };
+  res.render("map", templateVars);
 });
 
 module.exports = router;

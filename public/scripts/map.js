@@ -20,8 +20,8 @@ const handleMapClick = (e) => {
   $pointForm[0].reset();
   $pointForm.data("coords", e.latlng);
   $pointForm
-    .css("top", e.layerPoint.y)
-    .css("left", e.layerPoint.x)
+    .css("top", e.containerPoint.y)
+    .css("left", e.containerPoint.x)
     .removeClass("hidden");
 
   $("#point-title").trigger("focus");
@@ -32,7 +32,6 @@ const loadMap = (position) => {
   const { longitude } = position.coords;
 
   const coords = [latitude, longitude];
-  console.log(coords);
 
   map = L.map("map").setView(coords, 13);
 
@@ -62,8 +61,8 @@ const renderPointMarker = (point) => {
     L.popup({
       maxWidth: 250,
       minWidth: 100,
-      autoClose: false,
-      closeOnClick: false,
+      // autoClose: false,
+      // closeOnClick: false,
       className: `point-popup`,
     })
   );
@@ -92,10 +91,6 @@ const removeMarker = (marker, point_id) => {
       addPoints($("#map").data("map_id"));
     })
     .fail((err) => console.log(err));
-
-  // map.eachLayer((layer) => {
-  //   if (layer._leaflet_id === marker) map.removeLayer(layer);
-  // });
 };
 
 const clearMap = () => {
@@ -117,26 +112,7 @@ const addPoints = (map_id) => {
     })
     .fail((err) => console.log(err));
 
-  $("#map").data({ map_id });
-};
-
-const listMaps = () => {
-  $.get(`/api/maps`).done(({ maps }) => {
-    createMapsList(maps);
-  });
-};
-
-const createMapsList = (maps) => {
-  console.log(maps);
-
-  const $mapsList = $("#maps-list");
-  $mapsList.empty();
-  maps.forEach((map) => {
-    $(`<li class="map" id=${map.id}>`)
-      .text(map.name)
-      .appendTo($mapsList)
-      .on("click", handleMapListClick);
-  });
+  // $("#map").data({ map_id });
 };
 
 const handleMapListClick = (e) => {
@@ -192,7 +168,11 @@ const handlePointFormLosingFocus = (e) => {
 };
 
 const handleMapLoaded = () => {
-  listMaps();
+  console.log("map has been loaded");
+  const map_id = $("#map").data("map_id");
+  console.log(map_id);
+
+  addPoints(map_id);
 };
 
 const handlePointFormInput = (e) => {
