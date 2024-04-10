@@ -46,13 +46,30 @@ const addPoint = ({
     .catch((err) => err);
 };
 
-const updatePointById = (id, { title, image_url, description }) => {
-  const pData = [title, description, image_url, Number(id)];
+const updatePointById = (id, { title, image_url, description, coords }) => {
+  const pData = [];
+  let queryString = "UPDATE points SET ";
+  if (title) {
+    pData.push(title);
+    queryString += `title=$${pData.length} `;
+  }
+  if (description) {
+    pData.push(description);
+    queryString += `description=$${pData.length} `;
+  }
+  if (coords) {
+    pData.push(`(${Number(coords[0])}, ${Number(coords[1])})`);
+    queryString += `coords=$${pData.length} `;
+  }
+  if (image_url) {
+    pData.push(image_url);
+    queryString += `image_url=$${pData.length} `;
+  }
+  pData.push(id);
+  queryString += `WHERE id=${pData.length}`;
+
   return db
-    .query(
-      "UPDATE points SET title=$1, description=$2, image_url=$3 WHERE id=$4;",
-      pData
-    )
+    .query(queryString, pData)
     .then(() => "point updated in database")
     .catch((err) => err);
 };

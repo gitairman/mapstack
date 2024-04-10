@@ -120,7 +120,11 @@ const renderPointMarker = (point) => {
   </div>
   `;
 
-  const marker = L.marker(Object.values(point.coords), { title: point.title });
+  const marker = L.marker(Object.values(point.coords), {
+    title: point.title,
+    draggable: true,
+    point_id: point.id,
+  });
   marker.addTo(map).bindPopup(
     L.popup({
       maxWidth: 250,
@@ -130,6 +134,7 @@ const renderPointMarker = (point) => {
       className: `point-popup`,
     })
   );
+  marker.on("moveend", handleMarkerMove);
 
   if (loggedIn) {
     popupContent += `
@@ -147,6 +152,22 @@ const renderPointMarker = (point) => {
       direction: "top",
     })
     .openTooltip();
+};
+
+const handleMarkerMove = (e) => {
+  console.log(e);
+  const {
+    target: {
+      options: point_id,
+      _latlng: { lat, lng },
+    },
+  } = e;
+  $.ajax(`/api/points/${point_id}`, {
+    method: "PATCH",
+    data: { coords: [lat, lng] },
+  })
+    .done((result) => console.log(result))
+    .fail((err) => console.log(err));
 };
 
 const handlePopupClick = (e) => {
@@ -221,8 +242,6 @@ const addPoints = (map_id) => {
       $(".leaflet-popup-pane").on("click", handlePopupClick);
     })
     .fail((err) => console.log(err));
-
-  // $("#map").data({ map_id });
 };
 
 const handleMapListClick = (e) => {
