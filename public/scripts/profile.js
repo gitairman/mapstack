@@ -29,7 +29,7 @@ const handleCreateNewMap = (e) => {
     .fail((err) => console.log(err));
 };
 
-const renderAllMaps = ({ allMaps, favourites, contributions, created }) => {
+const renderAllMaps = ({ allMaps, favourites }) => {
   const $mapsList = $("#maps-list");
   $mapsList.empty();
   allMaps.forEach((map) => {
@@ -38,9 +38,11 @@ const renderAllMaps = ({ allMaps, favourites, contributions, created }) => {
     $(
       `<li class="map" >
       <a id=${`map-${map.id}`} href=${`/maps/${map.id}`}>${map.name}</a>
-      <button id=${`all-fav-btn-${map.id}`}>${
-        isFavourite ? "UNFAVOURITE" : "FAVOURITE"
-      }</button>
+      ${
+        isFavourite
+          ? ""
+          : `<button id=${`fav-btn-${map.id}`}>Favourite</button>`
+      }
       </li>`
     ).appendTo($mapsList);
   });
@@ -53,7 +55,7 @@ const renderFavourites = (favourites) => {
     $(
       `<li class="map" >
       <a id=${`fav-${map.id}`} href=${`/maps/${map.id}`}>${map.name}</a>
-      <button id=${`fav-btn-${map.id}`}>UNFAVOURITE</button>
+      <button id=${`unfav-btn-${map.id}`}>UnFavourite</button>
       </li>`
     ).appendTo($favsList);
   });
@@ -92,9 +94,9 @@ const handleMapListClick = (e) => {
 
 const handleFavouriteToggle = (btn) => {
   let method;
-  const [map_id] = btn.id.split("-").slice(-1);
+  const [todo, , map_id] = btn.id.split("-");
   const user_id = 1;
-  if (btn.innerText === "UNFAVOURITE") method = "DELETE";
+  if (todo === "unfav") method = "DELETE";
   else method = "POST";
 
   $.ajax("api/maps/favourite", {
@@ -102,7 +104,7 @@ const handleFavouriteToggle = (btn) => {
     data: { map_id, user_id },
   })
     .done(() => createProfile())
-    .fail();
+    .fail((err) => console.log(err));
 };
 
 const handleDeleteMap = (map_id) => {

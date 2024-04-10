@@ -158,7 +158,7 @@ const handleMarkerMove = (e) => {
   console.log(e);
   const {
     target: {
-      options: point_id,
+      options: { point_id },
       _latlng: { lat, lng },
     },
   } = e;

@@ -47,15 +47,17 @@ const addPoint = ({
 };
 
 const updatePointById = (id, { title, image_url, description, coords }) => {
+  console.log(id, title, description, image_url, coords);
+
   const pData = [];
   let queryString = "UPDATE points SET ";
   if (title) {
     pData.push(title);
-    queryString += `title=$${pData.length} `;
+    queryString += `title=$${pData.length}, `;
   }
   if (description) {
     pData.push(description);
-    queryString += `description=$${pData.length} `;
+    queryString += `description=$${pData.length}, `;
   }
   if (coords) {
     pData.push(`(${Number(coords[0])}, ${Number(coords[1])})`);
@@ -66,7 +68,9 @@ const updatePointById = (id, { title, image_url, description, coords }) => {
     queryString += `image_url=$${pData.length} `;
   }
   pData.push(id);
-  queryString += `WHERE id=${pData.length}`;
+  queryString += `WHERE id=$${pData.length};`;
+
+  console.log(queryString, pData);
 
   return db
     .query(queryString, pData)
