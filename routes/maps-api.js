@@ -33,15 +33,16 @@ router.get("/favourite", (req, res) => {
 
 router.get("/profile", (req, res) => {
   const id = 1;
-  mapQueries
-    .getFavourites(id)
-    .then((favourites) =>
-      mapQueries.getContributedTo(id).then((contributions) =>
-        mapQueries.getCreated(id).then((created) => {
-          return res.json({ favourites, contributions, created });
-        })
-      )
-    )
+
+  Promise.all([
+    mapQueries.getAllMaps(),
+    mapQueries.getFavourites(id),
+    mapQueries.getContributedTo(id),
+    mapQueries.getCreated(id),
+  ])
+    .then(([allMaps, favourites, contributions, created]) => {
+      res.json({ allMaps, favourites, contributions, created });
+    })
     .catch((err) => console.log(err));
 });
 

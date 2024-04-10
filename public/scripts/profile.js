@@ -1,6 +1,6 @@
 $(() => {
   $("#create-map-form").on("submit", handleCreateNewMap);
-  listMaps();
+  $("#maps-list").on("click", handleMapListClick);
   createProfile();
 });
 
@@ -8,6 +8,7 @@ const createProfile = () => {
   $.get("/api/maps/profile")
     .done((data) => {
       console.log(data);
+      createMapsList(data);
     })
     .fail((err) => console.log(err));
 };
@@ -25,27 +26,45 @@ const handleCreateNewMap = (e) => {
     .fail((err) => console.log(err));
 };
 
-const listMaps = () => {
-  return $.get(`/api/maps`).done(({ maps }) => {
-    createMapsList(maps);
-  });
-};
-
-const createMapsList = (maps) => {
+const createMapsList = ({ allMaps, favourites, contributions, created }) => {
   const $mapsList = $("#maps-list");
   $mapsList.empty();
-  maps.forEach((map) => {
+  allMaps.forEach((map) => {
+    let isFavourite = false,
+      isCreator = false;
+    if (favourites.some(({ id }) => id === map.id)) isFavourite = true;
+    if (created.some(({ id }) => id === map.id)) isCreator = true;
     $(
-      `<li class="map" ><a id=${`map-${map.id}`} href=${`/maps/${map.id}`}>${
-        map.name
-      }</a></li>`
-    )
-      .appendTo($mapsList)
-      .on("click", handleMapListClick);
+      `<li class="map" >
+      <a id=${`map-${map.id}`} href=${`/maps/${map.id}`}>${map.name}</a>
+      <button id=${`fav-btn-${map.id}`}>${
+        isFavourite ? "UNFAVOURITE" : "FAVOURITE"
+      }</button>
+      ${isCreator ? `<button id=${`del-btn-${map.id}`}>DELETE</button>` : ""}
+      </li>`
+    ).appendTo($mapsList);
   });
 };
 
 const handleMapListClick = (e) => {
-  const map_id = Number(e.target.id);
-  $.get(`/maps/${map_id}`).done().fail();
+  if (e.target.id.includes("fav-btn")) return handleFavouriteToggle(e.target);
+  if (e.target.id.includes("del-btn"))
+    return handleDeleteMap(e.target.id.split("-")[2]);
 };
+
+const handleFavouriteToggle = (btn) => {
+  let method;
+  const map_id = btn.id.split("-")[2];
+  const user_id = 1;
+  if (btn.innerText === "UNFAVOURITE") method = "DELETE";
+  else method = "POST";
+
+  $.ajax("api/maps/favourite", {
+    method,
+    data: { map_id, user_id },
+  })
+    .done(() => createProfile())
+    .fail();
+};
+
+const handleDeleteMap = (map_id) => {};

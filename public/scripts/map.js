@@ -1,5 +1,6 @@
 let map;
 let loggedIn = true;
+let user_id = 1;
 
 $(() => {
   loadMap({ coords: { latitude: 50.0760328, longitude: -123.0367918 } });
@@ -28,7 +29,7 @@ const initializeElements = () => {
 };
 
 const checkFavourited = () => {
-  const data = { user_id: 2, map_id: $("#map").data("map_id") };
+  const data = { user_id, map_id: $("#map").data("map_id") };
   $.get("/api/maps/favourite", data)
     .done((favourite) => {
       if (!favourite) {
@@ -45,14 +46,14 @@ const checkFavourited = () => {
 const handleFavouriteClick = () => {
   console.log("inside favourite click");
 
-  const data = { user_id: 2, map_id: $("#map").data("map_id") };
+  const data = { user_id, map_id: $("#map").data("map_id") };
   $.post("/api/maps/favourite", data)
     .done(() => checkFavourited())
     .fail((err) => console.log(err));
 };
 const handleUnFavouriteClick = () => {
   console.log("inside favourite click");
-  const data = { user_id: 2, map_id: $("#map").data("map_id") };
+  const data = { user_id, map_id: $("#map").data("map_id") };
   $.ajax(`/api/maps/favourite`, {
     method: "DELETE",
     data,
@@ -240,7 +241,7 @@ const handlePointFormSubmit = (e) => {
   }, {});
   point.coords = [newPointCoords.lat, newPointCoords.lng];
   point.map_id = $("#map").data("map_id");
-  point.added_by = 1; // user_id of logged in user to go here
+  point.added_by = user_id; // user_id of logged in user to go here
   console.log(point);
   if (!point.title) {
     $("#no-title-error").removeClass("hidden");
@@ -270,7 +271,7 @@ const handleEditFormSubmit = (e) => {
     return a;
   }, {});
   point.map_id = $("#map").data("map_id");
-  point.added_by = 1; // user_id of logged in user to go here
+  point.added_by = user_id; // user_id of logged in user to go here
   console.log(point);
   if (!point.title) {
     $pointForm.children("#no-title-error").removeClass("hidden");
