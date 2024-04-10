@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="/styles/nav.css">
 
     <div class="navbar-collapse flex-row-reverse mr-auto">
-      <% if (typeof username !=="undefined" ) { %>
+      <% if (typeof username !== "undefined" ) { %>
         <span class="navbar-text">Logged in as <%= username %></span>
         <form method="POST" action="/logout">
           <button type="submit" class="btn btn-light mr-2">Log out</button>

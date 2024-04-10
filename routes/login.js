@@ -10,7 +10,8 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
 	const { username, password } = req.body;
 
-	userQueries.checkUsers(username, password)
+	userQueries
+	.checkUsers(username, password)
 		.then(user => {
 			if (user) {
 				req.session.user_id = user.id;

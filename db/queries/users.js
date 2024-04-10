@@ -7,6 +7,15 @@ const getUsers = () => {
   });
 };
 
+const getUserById = (id) => {
+  return db.query("SELECT * FROM users WHERE id = $1", [id]).then((data) => {
+    return data.rows[0];
+  })
+    .catch(err => {
+      console.error(err);
+    });
+};
+
 const checkUsers = (username, password) => {
   return db.query('SELECT username, password FROM users WHERE username = $1', [username])
     .then(data => {
@@ -36,4 +45,4 @@ const newUser = (username, hashedPassword) => {
     });
 };
 
-module.exports = { getUsers, checkUsers, newUser };
+module.exports = { getUsers, checkUsers, newUser, getUserById };
