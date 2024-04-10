@@ -1,0 +1,45 @@
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background-color: lightblue;
+  border-radius: 3%;
+  width: 30vw;
+  height: 25vw;
+  align-items: flex-start;
+}
+
+#username,
+#password {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  margin: 0.7em;
+  padding: 0.3em;
+
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+
+  width: 25vw;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.btn-register {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+  padding: 0.4em;
+  margin-top: 2em;
+
+  &:hover {
+    color: white;
+    cursor: pointer;
+  }
+}

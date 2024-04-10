@@ -95,13 +95,12 @@ const handleMapListClick = (e) => {
 const handleFavouriteToggle = (btn) => {
   let method;
   const [todo, , map_id] = btn.id.split("-");
-  const user_id = 1;
   if (todo === "unfav") method = "DELETE";
   else method = "POST";
 
   $.ajax("api/maps/favourite", {
     method,
-    data: { map_id, user_id },
+    data: { map_id },
   })
     .done(() => createProfile())
     .fail((err) => console.log(err));

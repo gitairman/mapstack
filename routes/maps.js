@@ -9,8 +9,8 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  const loggedIn = true;
-  if (!loggedIn) return res.render("mapsList");
+  const username = req.session?.username;
+  if (!username) return res.render("mapsList");
   res.render("profile");
 });
 router.get("/:id", (req, res) => {
