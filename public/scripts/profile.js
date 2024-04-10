@@ -1,6 +1,6 @@
 $(() => {
   $("#create-map-form").on("submit", handleCreateNewMap);
-  $("#maps-list").on("click", handleMapListClick);
+  $("#profile-container").on("click", handleMapListClick);
   createProfile();
 });
 
@@ -8,7 +8,10 @@ const createProfile = () => {
   $.get("/api/maps/profile")
     .done((data) => {
       console.log(data);
-      createMapsList(data);
+      renderAllMaps(data);
+      renderFavourites(data.favourites);
+      renderContributedTo(data.contributions);
+      renderCreated(data.created);
     })
     .fail((err) => console.log(err));
 };
@@ -26,23 +29,58 @@ const handleCreateNewMap = (e) => {
     .fail((err) => console.log(err));
 };
 
-const createMapsList = ({ allMaps, favourites, contributions, created }) => {
+const renderAllMaps = ({ allMaps, favourites, contributions, created }) => {
   const $mapsList = $("#maps-list");
   $mapsList.empty();
   allMaps.forEach((map) => {
-    let isFavourite = false,
-      isCreator = false;
+    let isFavourite = false;
     if (favourites.some(({ id }) => id === map.id)) isFavourite = true;
-    if (created.some(({ id }) => id === map.id)) isCreator = true;
     $(
       `<li class="map" >
       <a id=${`map-${map.id}`} href=${`/maps/${map.id}`}>${map.name}</a>
-      <button id=${`fav-btn-${map.id}`}>${
+      <button id=${`all-fav-btn-${map.id}`}>${
         isFavourite ? "UNFAVOURITE" : "FAVOURITE"
       }</button>
-      ${isCreator ? `<button id=${`del-btn-${map.id}`}>DELETE</button>` : ""}
       </li>`
     ).appendTo($mapsList);
+  });
+};
+
+const renderFavourites = (favourites) => {
+  const $favsList = $("#favourites-list");
+  $favsList.empty();
+  favourites.forEach((map) => {
+    $(
+      `<li class="map" >
+      <a id=${`fav-${map.id}`} href=${`/maps/${map.id}`}>${map.name}</a>
+      <button id=${`fav-btn-${map.id}`}>UNFAVOURITE</button>
+      </li>`
+    ).appendTo($favsList);
+  });
+};
+
+const renderContributedTo = (contributions) => {
+  const $contributedToList = $("#contributed-list");
+  $contributedToList.empty();
+  contributions.forEach((map) => {
+    $(
+      `<li class="map" >
+      <a id=${`contributed-${map.id}`} href=${`/maps/${map.id}`}>${map.name}</a>
+      </li>`
+    ).appendTo($contributedToList);
+  });
+};
+
+const renderCreated = (created) => {
+  const $createdList = $("#created-list");
+  $createdList.empty();
+  created.forEach((map) => {
+    $(
+      `<li class="map" >
+      <a id=${`contributed-${map.id}`} href=${`/maps/${map.id}`}>${map.name}</a>
+      <button id=${`del-btn-${map.id}`}>DELETE</button>
+      </li>`
+    ).appendTo($createdList);
   });
 };
 
@@ -54,7 +92,7 @@ const handleMapListClick = (e) => {
 
 const handleFavouriteToggle = (btn) => {
   let method;
-  const map_id = btn.id.split("-")[2];
+  const [map_id] = btn.id.split("-").slice(-1);
   const user_id = 1;
   if (btn.innerText === "UNFAVOURITE") method = "DELETE";
   else method = "POST";
@@ -67,4 +105,10 @@ const handleFavouriteToggle = (btn) => {
     .fail();
 };
 
-const handleDeleteMap = (map_id) => {};
+const handleDeleteMap = (map_id) => {
+  $.ajax(`/api/maps/${map_id}`, {
+    method: "DELETE",
+  })
+    .done(() => createProfile())
+    .fail((err) => console.log(err));
+};

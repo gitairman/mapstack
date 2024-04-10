@@ -79,14 +79,28 @@ router.post("/favourite", (req, res) => {
   mapQueries
     .favouriteMap(map_id, user_id)
     .then((result) => res.send(result))
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
 });
 router.delete("/favourite", (req, res) => {
   const { user_id, map_id } = req.body;
   mapQueries
     .unFavouriteMap(map_id, user_id)
     .then((result) => res.send(result))
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
+});
+
+router.delete("/:id", (req, res) => {
+  const id = req.params.id;
+  mapQueries
+    .deleteMap(id)
+    .then((result) => res.send(result))
+    .catch((err) => {
+      res.status(500).json({ error: err.message });
+    });
 });
 
 module.exports = router;

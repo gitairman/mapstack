@@ -16,10 +16,25 @@
     <script src="/scripts/profile.js" defer></script>
   </head>
   <body>
-    <div id="maplist-container">
-      <h2>All Maps</h2>
-      <ul id="maps-list"></ul>
-    </div>
+    <section id="profile-container">
+      <div id="allmaps-container">
+        <h2>All Maps</h2>
+        <ul id="maps-list"></ul>
+      </div>
+      <div id="favourites-container">
+        <h2>Favourites</h2>
+        <ul id="favourites-list"></ul>
+      </div>
+      <div id="contributed-container">
+        <h2>Contributed To</h2>
+        <ul id="contributed-list"></ul>
+      </div>
+      <div id="created-container">
+        <h2>Created</h2>
+        <ul id="created-list"></ul>
+      </div>
+    </section>
+
     <form id="create-map-form">
       <p id="no-name-error" class="hidden">You must add a name!</p>
       <input

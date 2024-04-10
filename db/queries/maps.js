@@ -101,6 +101,13 @@ const checkIfFavourite = (map_id, user_id) => {
     .catch((err) => console.log(err));
 };
 
+const deleteMap = (id) => {
+  return db
+    .query("DELETE FROM maps WHERE id=$1;", [id])
+    .then(() => "map deleted from database")
+    .catch((err) => err);
+};
+
 module.exports = {
   getAllMaps,
   getMapById,
@@ -111,4 +118,5 @@ module.exports = {
   favouriteMap,
   unFavouriteMap,
   checkIfFavourite,
+  deleteMap,
 };
