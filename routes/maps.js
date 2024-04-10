@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const mapQueries = require('../db/queries/maps');
 
+<<<<<<< HEAD
 //To be replaced by queries
 const fakeMaps = [
   { id: 1, title: 'Map 1', description: 'Description of Map 1', user_id: 1, coordinates: [34.0522, -118.2437] },
@@ -29,5 +30,19 @@ router.get('/', (req, res) => {
 // 		})
 
 // })
+=======
+router.get("/", (req, res) => {
+  const username = req.session?.username;
+  if (!username) return res.render("mapsList");
+  res.render("profile", { username });
+});
+router.get("/:id", (req, res) => {
+  console.log("rendering map by id");
+  const username = req.session?.username;
+  const map_id = req.params.id;
+  const templateVars = { map_id, username };
+  res.render("map", templateVars);
+});
+>>>>>>> feature/combinemaps
 
 module.exports = router;

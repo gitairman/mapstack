@@ -8,7 +8,6 @@
 const express = require("express");
 const router = express.Router();
 const mapQueries = require("../db/queries/maps");
-const { getContributedTo } = require("../db/queries/maps");
 
 router.get("/", (req, res) => {
   mapQueries
@@ -22,7 +21,9 @@ router.get("/", (req, res) => {
 });
 
 router.get("/favourite", (req, res) => {
-  const { user_id, map_id } = req.query;
+  const { map_id } = req.query;
+  const user_id = req.session.user_id;
+
   mapQueries
     .checkIfFavourite(map_id, user_id)
     .then((result) => res.send(result))
@@ -32,7 +33,7 @@ router.get("/favourite", (req, res) => {
 });
 
 router.get("/profile", (req, res) => {
-  const id = 1;
+  const id = req.session.user_id;
 
   Promise.all([
     mapQueries.getAllMaps(),
@@ -75,7 +76,10 @@ router.post("/", (req, res) => {
 });
 
 router.post("/favourite", (req, res) => {
-  const { user_id, map_id } = req.body;
+  const { map_id } = req.body;
+  const user_id = req.session.user_id;
+  console.log(req.session);
+
   mapQueries
     .favouriteMap(map_id, user_id)
     .then((result) => res.send(result))
@@ -84,7 +88,8 @@ router.post("/favourite", (req, res) => {
     });
 });
 router.delete("/favourite", (req, res) => {
-  const { user_id, map_id } = req.body;
+  const { map_id } = req.body;
+  const user_id = req.session.user_id;
   mapQueries
     .unFavouriteMap(map_id, user_id)
     .then((result) => res.send(result))

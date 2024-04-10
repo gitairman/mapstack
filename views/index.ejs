@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <title>Home Page</title>
 
-<head>
-  <title>Home Page</title>
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rufina:wght@400;700&family=Telex&display=swap"
+      rel="stylesheet"
+    />
 
+<<<<<<< HEAD
   <!-- google font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,12 +21,19 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+=======
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+>>>>>>> feature/combinemaps
 
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/layout.css" />
+    <link rel="stylesheet" href="/styles/index.css" />
 
+<<<<<<< HEAD
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/maps.js"></script>
 </head>
@@ -46,5 +61,31 @@
   </div>
 
 </body>
+=======
+    <script src="/vendor/jquery-3.0.0.js"></script>
+  </head>
 
+  <body class="index-body">
+    <div id="typewriter-output">
+      <script src="scripts/typewriter.js"></script>
+      <script>
+        typewriter("Welcome to Mapstack", 110);
+      </script>
+    </div>
+>>>>>>> feature/combinemaps
+
+    <div class="directory">
+      <form method="GET" action="/maps">
+        <button type="submit" id="btn-maps">View Public Maps</button>
+      </form>
+
+      <form method="GET" action="/login">
+        <button type="submit" id="btn-sign-in">Sign in</button>
+      </form>
+
+      <form method="GET" action="/register">
+        <button type="submit" id="btn-register">Register</button>
+      </form>
+    </div>
+  </body>
 </html>

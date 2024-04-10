@@ -2,10 +2,17 @@
 require("dotenv").config();
 
 // Web server config
+<<<<<<< HEAD
 const sassMiddleware = require('./lib/sass-middleware');
 const express = require('express');
 const morgan = require('morgan');
 const cookieSession = require('cookie-session')
+=======
+const sassMiddleware = require("./lib/sass-middleware");
+const express = require("express");
+const morgan = require("morgan");
+const cookieSession = require("cookie-session");
+>>>>>>> feature/combinemaps
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -25,6 +32,7 @@ app.use(
     isSass: false, // false => scss, true => sass
   })
 );
+<<<<<<< HEAD
 app.use(express.static('public'));
 app.use(cookieSession({
   name: 'session',
@@ -39,9 +47,32 @@ const mapsRoutes = require('./routes/maps');
 const loginRoutes = require('./routes/login');
 const registerRoutes = require('./routes/register');
 const profileRoutes = require('./routes/profile');
+=======
+app.use(express.static("public"));
+app.use(
+  cookieSession({
+    name: "session",
+    keys: ["key 1", "key 2"],
+  })
+);
+
+// Separated Routes for each Resource
+// Note: Feel free to replace the example routes below with your own
+const userApiRoutes = require("./routes/users-api");
+const widgetApiRoutes = require("./routes/widgets-api");
+const pointApiRoutes = require("./routes/points-api");
+const mapApiRoutes = require("./routes/maps-api");
+
+const usersRoutes = require("./routes/users");
+const mapsRoutes = require("./routes/maps");
+const loginRoutes = require("./routes/login");
+const registerRoutes = require("./routes/register");
+const logoutRoutes = require("./routes/logout");
+>>>>>>> feature/combinemaps
 
 // Mount all resource routes
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
+<<<<<<< HEAD
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
@@ -49,6 +80,17 @@ app.use('/maps', mapsRoutes);
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
 app.use('/profile', profileRoutes);
+=======
+app.use("/api/users", userApiRoutes);
+app.use("/api/widgets", widgetApiRoutes);
+app.use("/api/points", pointApiRoutes);
+app.use("/api/maps", mapApiRoutes);
+
+app.use("/users", usersRoutes);
+app.use("/login", loginRoutes);
+app.use("/register", registerRoutes);
+app.use("/logout", logoutRoutes);
+>>>>>>> feature/combinemaps
 // Note: mount other resources here, using the same pattern above
 app.use("/maps", mapsRoutes);
 
