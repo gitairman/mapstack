@@ -22,6 +22,9 @@
 
 	<article class="container">
 		<form method="POST" action="/login">
+			<% if (error) { %>
+				<p class="error-message"><%= error %></p>
+		<% } %>
 			<input type="text" name="username" placeholder="Username" id="username">
 			<input type="password" name="password" placeholder="Password" id="password">
 			<button type="submit" class="btn-sign-in">Sign in</button>

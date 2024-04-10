@@ -1,20 +1,11 @@
-<header class="nav">
-  <nav class="navbar navbar-expand-md">
-    <span class="navbar-toggler-icon"></span>
+<header>
+  <nav class="navbar navbar-expand-md navbar-dark">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-      aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-      <div class="navbar-nav">
-        <a class="navbar-brand" href="/maps">Maps</a>
-      </div>
-    </div>
+    <link rel="stylesheet" href="/styles/nav.css"/>
 
-    <link rel="stylesheet" href="/styles/nav.css">
-
-    <div class="navbar-collapse flex-row-reverse mr-auto">
+    <div class="navbar-collapse">
+      <a class="navbar-brand" href="/maps">Maps</a>
       <% if (typeof username !== "undefined" ) { %>
         <span class="navbar-text">Logged in as <%= username %></span>
         <form method="POST" action="/logout">

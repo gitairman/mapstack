@@ -17,10 +17,11 @@ router.post('/', (req, res) => {
 				req.session.user_id = user.id;
 				return res.redirect('/profile');
 			}
-			return res.status(401).send('Please provide a username and password that match');
+			res.render('login', { error: 'An error occurred. Please try again later.' });
 		})
 		.catch(err => {
 			console.error(err);
+			res.render('login', { error: 'An error occurred. Please try again later.' });
 		});
 });
 

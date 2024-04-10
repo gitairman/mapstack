@@ -3,16 +3,16 @@ $font-telex: 'Telex', serif;
 .container {
 	display: flex;
 	justify-content: center;
-	align-items: center;
-	flex-direction: column;
 	background-color: lightblue;
 	border-radius: 3%;
 	width: 30vw;
 	height: 25vw;
 }
-
+.container
 #username,
 #password {
+	display: flex;
+	justify-content: center;
 	background-color: transparent;
 	color: white;
 	border: 2px solid white;
@@ -36,6 +36,8 @@ $font-telex: 'Telex', serif;
 }
 
 .btn-sign-in {
+	display: flex;
+	justify-content: center;
 	background-color: transparent;
 	color: white;
 	border: 2px solid white;
@@ -57,4 +59,13 @@ $font-telex: 'Telex', serif;
 		color: black;
 		cursor: pointer;
 	}
+}
+
+.error-message {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background-color: lightpink;
+	border: 1px solid red;
+	color: white;
 }
