@@ -1,11 +1,14 @@
+<<<<<<< HEAD
 const db = require('../connection');
 const bcrypt = require('bcrypt');
+=======
+const db = require("../connection");
+>>>>>>> 3f2ebf181a8bea14783303269b1915a3c3189236
 
 const getUsers = () => {
-  return db.query('SELECT * FROM users;')
-    .then(data => {
-      return data.rows;
-    });
+  return db.query("SELECT * FROM users;").then((data) => {
+    return data.rows;
+  });
 };
 
 const checkUsers = (username, password) => {

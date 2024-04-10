@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Leaflet with NPM</title>
+    <link rel="stylesheet" href="/styles/map.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+      integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+      crossorigin=""
+    />
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <script
+      defer
+      src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+      integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+      crossorigin=""
+    ></script>
+    <script
+      defer
+      src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"
+    ></script>
+    <script src="/scripts/map.js" defer></script>
+  </head>
+  <body>
+    <nav>
+      <button id="fav-btn">ADD TO FAVOURITES</button>
+      <button id="unfav-btn" class="hidden">REMOVE FROM FAVOURITES</button>
+    </nav>
+    <form id="point-form" class="hidden">
+      <p>New Point</p>
+      <p id="no-title-error" class="hidden">Point must have a title!</p>
+      <input id="point-title" name="title" type="text" placeholder="title" />
+      <textarea
+        name="description"
+        type="text"
+        placeholder="description"
+      ></textarea>
+      <input
+        id="point-img-url"
+        name="image_url"
+        type="text"
+        placeholder="image url"
+      />
+      <div>
+        <button type="submit">Add Point</button>
+        <input type="reset" id="cancel-point" value="Cancel" />
+      </div>
+    </form>
+    <form id="edit-form" class="hidden">
+      <p>Edit Point</p>
+      <p id="no-title-error" class="hidden">Point must have a title!</p>
+      <input id="point-title" name="title" type="text" placeholder="title" />
+      <textarea
+        name="description"
+        type="text"
+        placeholder="description"
+      ></textarea>
+      <input
+        id="point-img-url"
+        name="image_url"
+        type="text"
+        placeholder="image url"
+      />
+      <div>
+        <button type="submit">Edit Point</button>
+        <input type="reset" id="cancel-point" value="Cancel" />
+      </div>
+    </form>
+    <div id="map" data-map_id="<%= map_id %>"></div>
+  </body>
+</html>
