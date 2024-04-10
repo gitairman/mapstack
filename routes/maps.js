@@ -9,7 +9,9 @@ const express = require("express");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  res.render("mapsList");
+  const loggedIn = true;
+  if (!loggedIn) return res.render("mapsList");
+  res.render("profile");
 });
 router.get("/:id", (req, res) => {
   console.log("rendering map by id");

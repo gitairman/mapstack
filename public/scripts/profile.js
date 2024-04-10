@@ -1,7 +1,16 @@
 $(() => {
   $("#create-map-form").on("submit", handleCreateNewMap);
   listMaps();
+  createProfile();
 });
+
+const createProfile = () => {
+  $.get("/api/maps/profile")
+    .done((data) => {
+      console.log(data);
+    })
+    .fail((err) => console.log(err));
+};
 
 const handleCreateNewMap = (e) => {
   e.preventDefault();
@@ -33,12 +42,6 @@ const createMapsList = (maps) => {
     )
       .appendTo($mapsList)
       .on("click", handleMapListClick);
-  });
-};
-
-const createProfile = (id) => {
-  return $.get(`/api/profile`).done(({ profile }) => {
-    console.log(profile);
   });
 };
 

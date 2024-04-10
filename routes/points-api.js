@@ -15,9 +15,7 @@ router.get("/", (req, res) => {
     .then((points) => {
       res.json({ points });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch((err) => res.status(500).json({ error: err.message }));
 });
 
 router.get("/:id", (req, res) => {
@@ -27,14 +25,15 @@ router.get("/:id", (req, res) => {
     .then((points) => {
       res.json({ points });
     })
-    .catch((err) => {
-      res.status(500).json({ error: err.message });
-    });
+    .catch((err) => res.status(500).json({ error: err.message }));
 });
 
 router.post("/", (req, res) => {
   const data = req.body;
-  pointQueries.addPoint(data).then((result) => res.send(result));
+  pointQueries
+    .addPoint(data)
+    .then((result) => res.send(result))
+    .catch((err) => res.status(500).json({ error: err.message }));
 });
 
 router.patch("/:id", (req, res) => {
@@ -42,7 +41,7 @@ router.patch("/:id", (req, res) => {
   pointQueries
     .updatePointById(id, req.body)
     .then((result) => res.send(result))
-    .catch((err) => console.log(err));
+    .catch((err) => res.status(500).json({ error: err.message }));
 });
 
 router.delete("/:id", (req, res) => {
@@ -51,7 +50,7 @@ router.delete("/:id", (req, res) => {
   pointQueries
     .deletePointbyId(id)
     .then((result) => res.send(result))
-    .catch((err) => console.log(err));
+    .catch((err) => res.status(500).json({ error: err.message }));
 });
 
 module.exports = router;
