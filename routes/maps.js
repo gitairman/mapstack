@@ -11,18 +11,9 @@ const fakeMaps = [
 
 //Use user cookie to display all maps, user's favourites and maps they've contributed to.
 router.get('/', (req, res) => {
-
-	const userID = req.session.user_id;
-
-	//To be replaced by queries
-	const fakeFavourites = [ 
-		{id: 1, map_id: 1, user_id: userID}
-	]
-
-	const mapsContributedTo = fakeMaps.filter(map => map.user_id === userID);
 	// mapQueries.fetchAllMaps()
 	// .then(maps => {
-		return res.render('maps', { maps: fakeMaps, favourites: fakeFavourites, contributedMaps: mapsContributedTo },);
+		return res.render('maps', { maps: fakeMaps });
 	})
 // 	// .catch(err => {
 // 		console.error(err);
