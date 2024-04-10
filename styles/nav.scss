@@ -1,10 +1,16 @@
 .nav {
-	background-color: lightblue;
+	background-color: rgb(252, 249, 229);
 	height: 12vh;
+	display: flex;
+	position: fixed;
+	top: 0;
+	justify-content: space-between;
+	width: 100%;
+	padding: 1em;
 }
 
-.navbar-nav .navbar-brand {
+.navbar-nav {
 	display: flex;
 	text-decoration: none;
-
+	justify-content: space-between;
 }

@@ -1,0 +1,19 @@
+body {
+	display: flex;
+	justify-content: space-evenly;
+
+	.map-list {
+		background-color: lightblue;
+		margin-top: 10em;
+	}
+
+	.favourites {
+		background-color: lightblue;
+		margin-top: 10em;
+	}
+
+	.contributed {
+		background-color: lightblue;
+		margin-top: 10em;
+	}
+}

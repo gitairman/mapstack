@@ -13,7 +13,7 @@ router.post('/', (req, res) => {
 	userQueries.checkUsers(username, password)
 		.then(user => {
 			if (user) {
-				req.session.username = username;
+				req.session.user_id = user.id;
 				return res.redirect('/profile');
 			}
 			return res.status(401).send('Please provide a username and password that match');
