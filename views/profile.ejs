@@ -18,7 +18,6 @@
   </head>
   <body>
     <% include partials/nav %>
-    <div id="spacer"></div>
     <section id="profile-container">
       <div id="allmaps-container">
         <h2>All Maps</h2>
@@ -38,21 +37,24 @@
       </div>
     </section>
 
-    <form id="create-map-form">
-      <p id="no-name-error" class="hidden">You must add a name!</p>
-      <input
-        id="new-map-name"
-        name="name"
-        type="text"
-        placeholder="new map name"
-      />
-      <textarea
-        id="new-map-desc"
-        name="description"
-        type="text"
-        placeholder="description"
-      ></textarea>
-      <button id="create-map-btn">Create New Map</button>
-    </form>
+    <section id="create-map-container">
+      <h3>Create New Map</h3>
+      <form id="create-map-form">
+        <p id="no-name-error" class="hidden">You must add a name!</p>
+        <input
+          id="new-map-name"
+          name="name"
+          type="text"
+          placeholder="new map name"
+        />
+        <textarea
+          id="new-map-desc"
+          name="description"
+          type="text"
+          placeholder="description"
+        ></textarea>
+        <button id="create-map-btn">Create New Map</button>
+      </form>
+    </section>
   </body>
 </html>

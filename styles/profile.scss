@@ -2,11 +2,26 @@
   display: none;
 }
 
+section {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin: auto;
+  border: solid black 1px;
+  padding: 2rem 0;
+}
+
+div {
+  border: solid black 2px;
+  padding: 1rem;
+}
+
 form {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   width: 10rem;
+  margin: auto;
 }
 
 a {
@@ -16,9 +31,31 @@ a {
 
 button {
   display: inline-block;
-  width: 125px;
+  width: 100px;
 }
 
 #spacer {
   height: 5vh;
+}
+
+ul {
+  list-style: none;
+  border: solid black 1px;
+  margin: 0;
+  padding: 0;
+}
+
+#create-map-btn {
+  width: 100%;
+}
+
+h3 {
+  margin: auto;
+  border: solid black 2px;
+  text-align: center;
+}
+
+#create-map-container {
+  display: inline-block;
+  padding: 2rem 0;
 }
