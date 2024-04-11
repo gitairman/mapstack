@@ -21,15 +21,13 @@ router.post("/", (req, res) => {
         return res.redirect("/maps");
       }
       res.render("login", {
-        error: "An error occurred. Please try again later.",
+        error: "Please provide an email and password that match",
       });
     })
     .catch((err) => {
       console.error(err);
-      res.render("login", {
-        error: "An error occurred. Please try again later.",
-      });
     });
 });
+
 
 module.exports = router;

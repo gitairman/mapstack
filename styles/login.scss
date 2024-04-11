@@ -1,21 +1,24 @@
 $font-telex: "Telex", serif;
 
-.container {
+.login-body .login-form {
   display: flex;
   justify-content: center;
+  align-items: flex-end;
   background-color: lightblue;
   border-radius: 3%;
   width: 30vw;
   height: 25vw;
 }
-.container #username,
+
+#username,
 #password {
   display: flex;
   justify-content: center;
+  width: 20vw;
   background-color: transparent;
   color: white;
   border: 2px solid white;
-  margin: 0.7em;
+  margin: 1.8em;
   padding: 0.3em;
   font-family: $font-telex;
   font-size: 1.3em;
@@ -34,7 +37,7 @@ $font-telex: "Telex", serif;
   color: white;
 }
 
-.btn-sign-in {
+.login-btn-sign-in {
   display: flex;
   justify-content: center;
   background-color: transparent;
@@ -48,23 +51,15 @@ $font-telex: "Telex", serif;
   border-bottom-left-radius: 20px;
   border-bottom-right-radius: 20px;
 
+  padding: 0.4em;
   width: 15vw;
   font-size: 1.1em;
-  padding: 0.4em;
-  margin-top: 2em;
+  margin: 3em;
+  margin-left: 7vw;
 
   &:hover {
     background-color: white;
     color: black;
     cursor: pointer;
   }
-}
-
-.error-message {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  background-color: lightpink;
-  border: 1px solid red;
-  color: white;
 }

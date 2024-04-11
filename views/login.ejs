@@ -12,25 +12,24 @@
     <link rel="stylesheet" href="/styles/main.css" />
     <link rel="stylesheet" href="/styles/layout.css" />
     <link rel="stylesheet" href="/styles/login.css" />
+    <link rel="stylesheet" href="/styles/errors.css" />
+
 
     <script src="/vendor/jquery-3.0.0.js"></script>
+    <script src="/scripts/login.js" defer></script>
     <!-- <script defer src=""></script> -->
-  </head>
-
-	<script src="/vendor/jquery-3.0.0.js"></script>
-	<!-- <script defer src=""></script> -->
 </head>
 
 <body class="login-body">
 
-	<article class="container">
+	<article class="login-form">
 		<form method="POST" action="/login">
 			<% if (error) { %>
 				<p class="error-message"><%= error %></p>
 		<% } %>
 			<input type="text" name="username" placeholder="Username" id="username">
 			<input type="password" name="password" placeholder="Password" id="password">
-			<button type="submit" class="btn-sign-in">Sign in</button>
+			<button type="submit" class="login-btn-sign-in">Sign in</button>
 		</form>
 	</article>
 
