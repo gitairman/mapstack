@@ -14,16 +14,13 @@
     <link rel="stylesheet" href="/styles/login.css" />
 
     <script src="/vendor/jquery-3.0.0.js"></script>
+    <scrpt defer src="/scripts/login.js"></scrpt>
     <!-- <script defer src=""></script> -->
   </head>
 
-	<script src="/vendor/jquery-3.0.0.js"></script>
-	<!-- <script defer src=""></script> -->
-</head>
-
 <body class="login-body">
 
-	<article class="container">
+	<article class="container" id="login-form">
 		<form method="POST" action="/login">
 			<% if (error) { %>
 				<p class="error-message"><%= error %></p>
