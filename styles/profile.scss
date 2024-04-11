@@ -26,12 +26,16 @@ form {
 
 a {
   display: inline-block;
-  width: 75px;
 }
 
 button {
   display: inline-block;
-  width: 100px;
+}
+
+li {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 #spacer {
