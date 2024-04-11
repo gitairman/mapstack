@@ -112,6 +112,10 @@ const handleDeleteMap = (map_id) => {
   $.ajax(`/api/maps/${map_id}`, {
     method: "DELETE",
   })
-    .done(() => createProfile())
+    .done((result) => {
+      console.log(result);
+
+      createProfile();
+    })
     .fail((err) => console.log(err));
 };

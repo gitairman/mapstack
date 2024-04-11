@@ -101,7 +101,7 @@ const checkIfFavourite = (map_id, user_id) => {
 
 const deleteMap = (id) => {
   return db
-    .query("DELETE FROM maps WHERE id=$1;", [id])
+    .query("DELETE FROM maps WHERE id=$1;", [Number(id)])
     .then(() => "map deleted from database")
     .catch((err) => err);
 };

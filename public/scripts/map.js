@@ -65,8 +65,8 @@ const handleMapClick = (e) => {
   $pointForm[0].reset();
   $pointForm.data("coords", e.latlng);
   $pointForm
-    .css("top", e.containerPoint.y)
-    .css("left", e.containerPoint.x)
+    .css("top", e.containerPoint.y + 40)
+    .css("left", e.containerPoint.x - 15)
     .removeClass("hidden");
 
   $("#point-title").trigger("focus");
