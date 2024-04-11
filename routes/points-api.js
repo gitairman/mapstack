@@ -30,6 +30,9 @@ router.get("/:id", (req, res) => {
 
 router.post("/", (req, res) => {
   const data = req.body;
+  data.added_by = req.session.user_id;
+  console.log(data.added_by);
+
   pointQueries
     .addPoint(data)
     .then((result) => res.send(result))

@@ -1,6 +1,5 @@
 let map;
 let loggedIn = true;
-let user_id = 1;
 
 $(() => {
   loadMap({ coords: { latitude: 50.0760328, longitude: -123.0367918 } });
@@ -29,8 +28,8 @@ const initializeElements = () => {
 };
 
 const checkFavourited = () => {
-  const data = { user_id, map_id: $("#map").data("map_id") };
-  $.get("/api/maps/favourite", data)
+  const map_id = $("#map").data("map_id");
+  $.get("/api/maps/favourite", { map_id })
     .done((favourite) => {
       if (!favourite) {
         $("#fav-btn").removeClass("hidden");
@@ -260,7 +259,6 @@ const handlePointFormSubmit = (e) => {
   }, {});
   point.coords = [newPointCoords.lat, newPointCoords.lng];
   point.map_id = $("#map").data("map_id");
-  point.added_by = user_id; // user_id of logged in user to go here
   console.log(point);
   if (!point.title) {
     $("#no-title-error").removeClass("hidden");
