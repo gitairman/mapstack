@@ -1,28 +1,17 @@
 $font-telex: "Telex", serif;
 
 .container {
-<<<<<<< HEAD
   display: flex;
   justify-content: center;
-  align-items: center;
-  flex-direction: column;
   background-color: lightblue;
   border-radius: 3%;
   width: 30vw;
   height: 25vw;
-=======
-	display: flex;
-	justify-content: center;
-	background-color: lightblue;
-	border-radius: 3%;
-	width: 30vw;
-	height: 25vw;
->>>>>>> 1d034a64b3aa932a5111d6bde3dbd82a63600ca4
 }
-.container
-#username,
+.container #username,
 #password {
-<<<<<<< HEAD
+  display: flex;
+  justify-content: center;
   background-color: transparent;
   color: white;
   border: 2px solid white;
@@ -31,18 +20,6 @@ $font-telex: "Telex", serif;
   font-family: $font-telex;
   font-size: 1.3em;
   padding: 0.3em;
-=======
-	display: flex;
-	justify-content: center;
-	background-color: transparent;
-	color: white;
-	border: 2px solid white;
-	margin: 0.7em;
-	padding: .3em;
-	font-family: $font-telex;
-	font-size: 1.3em;
-	padding: 0.3em;
->>>>>>> 1d034a64b3aa932a5111d6bde3dbd82a63600ca4
 
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -58,19 +35,12 @@ $font-telex: "Telex", serif;
 }
 
 .btn-sign-in {
-<<<<<<< HEAD
+  display: flex;
+  justify-content: center;
   background-color: transparent;
   color: white;
   border: 2px solid white;
   font-family: $font-telex;
-=======
-	display: flex;
-	justify-content: center;
-	background-color: transparent;
-	color: white;
-	border: 2px solid white;
-	font-family: $font-telex;
->>>>>>> 1d034a64b3aa932a5111d6bde3dbd82a63600ca4
 
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
@@ -83,27 +53,18 @@ $font-telex: "Telex", serif;
   padding: 0.4em;
   margin-top: 2em;
 
-<<<<<<< HEAD
   &:hover {
     background-color: white;
     color: black;
     cursor: pointer;
   }
 }
-=======
-	&:hover {
-		background-color: white;
-		color: black;
-		cursor: pointer;
-	}
-}
 
 .error-message {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	background-color: lightpink;
-	border: 1px solid red;
-	color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: lightpink;
+  border: 1px solid red;
+  color: white;
 }
->>>>>>> 1d034a64b3aa932a5111d6bde3dbd82a63600ca4
