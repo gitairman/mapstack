@@ -3,7 +3,7 @@ const userQueries = require("../db/queries/users");
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  return res.render("login");
+  return res.render("login", { error: null });
 });
 
 //Use imported function to verify user in the database and redirect to profile.
