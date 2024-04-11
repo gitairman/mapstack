@@ -1,7 +1,37 @@
-header {
+nav {
   display: flex;
   justify-content: space-between;
   background-color: lightblue;
   padding: 2em;
   height: 3vh;
+  z-index: 9999;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
+
+nav div {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  align-items: center;
+}
+
+form {
+  margin: 0;
+  padding: 0;
+  margin-left: 20px;
+}
+
+.btn-logout {
+  display: inline-block;
+  height: 1.5rem;
+  line-height: 0;
+  margin: 0;
+}
+
+#logged-in {
+  padding: 0;
+  margin: 0;
 }

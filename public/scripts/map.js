@@ -1,7 +1,9 @@
 let map;
-let loggedIn = true;
+let loggedIn = null;
 
 $(() => {
+  loggedIn = $("#logged-in").length;
+
   loadMap({ coords: { latitude: 50.0760328, longitude: -123.0367918 } });
   initializeElements();
 });
@@ -121,7 +123,7 @@ const renderPointMarker = (point) => {
 
   const marker = L.marker(Object.values(point.coords), {
     title: point.title,
-    draggable: true,
+    draggable: loggedIn ? true : false,
     point_id: point.id,
   });
   marker.addTo(map).bindPopup(
