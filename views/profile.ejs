@@ -38,53 +38,21 @@
       </div>
     </section>
 
-<head>
-  <title>Profile</title>
-
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/main.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
-  <link rel="stylesheet" href="/styles/profile.css" />
-
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/maps.js"></script>
-
-  <% include partials/nav %>
-</head>
-
-<body>
-  <div class="map-list">
-    <ul>
-      <% maps.forEach(map => { %>
-          <li>
-              <a href="/maps/<%= map.id %>"><%= map.title %></a>
-              <p><%= map.description %></p>
-          </li>
-      <% }); %>
-  </ul>
-  </div>
-  <div class="favourites">
-    <ul>
-      <% favourites.forEach(favourite => { %>
-        <li>
-          <a href="/maps/<%= favourite.id %>"><%= favourite.map_id %></a>
-        </li>
-      <% }); %>
-    </ul>
-  </div>
-  <div class="contributed">
-    <ul>
-        <% contributedMaps.forEach(map => { %>
-            <li>
-                <a href="/maps/<%= map.id %>"><%= map.title %></a>
-            </li>
-        <% }); %>
-    </ul>
-</div>
-</body>
+    <form id="create-map-form">
+      <p id="no-name-error" class="hidden">You must add a name!</p>
+      <input
+        id="new-map-name"
+        name="name"
+        type="text"
+        placeholder="new map name"
+      />
+      <textarea
+        id="new-map-desc"
+        name="description"
+        type="text"
+        placeholder="description"
+      ></textarea>
+      <button id="create-map-btn">Create New Map</button>
+    </form>
+  </body>
 </html>
