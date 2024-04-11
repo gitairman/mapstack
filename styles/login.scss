@@ -1,16 +1,3 @@
-<<<<<<< HEAD
-$font-telex: 'Telex', serif;
-
-.container {
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	background-color: lightblue;
-	border-radius: 3%;
-	width: 30vw;
-	height: 25vw;
-=======
 $font-telex: "Telex", serif;
 
 .container {
@@ -22,58 +9,10 @@ $font-telex: "Telex", serif;
   border-radius: 3%;
   width: 30vw;
   height: 25vw;
->>>>>>> feature/combinemaps
 }
 
 #username,
 #password {
-<<<<<<< HEAD
-	background-color: transparent;
-	color: white;
-	border: 2px solid white;
-	margin: 0.7em;
-	padding: .3em;
-	font-family: $font-telex;
-	font-size: 1.3em;
-	padding: 0.3em;
-
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
-
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
-
-	width: 25vw;
-}
-
-:hover {
-	color: white;
-}
-
-.btn-sign-in {
-	background-color: transparent;
-	color: white;
-	border: 2px solid white;
-	font-family: $font-telex;
-
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
-
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
-
-	width: 15vw;
-	font-size: 1.1em;
-	padding: 0.4em;
-	margin-top: 2em;
-
-	&:hover {
-		background-color: white;
-		color: black;
-		cursor: pointer;
-	}
-}
-=======
   background-color: transparent;
   color: white;
   border: 2px solid white;
@@ -119,4 +58,3 @@ $font-telex: "Telex", serif;
     cursor: pointer;
   }
 }
->>>>>>> feature/combinemaps

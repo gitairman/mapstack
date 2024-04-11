@@ -1,15 +1,4 @@
 .container {
-<<<<<<< HEAD
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	flex-direction: column;
-	background-color: lightblue;
-	border-radius: 3%;
-	width: 30vw;
-	height: 25vw;
-	align-items: flex-start;
-=======
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,26 +8,10 @@
   width: 30vw;
   height: 25vw;
   align-items: flex-start;
->>>>>>> feature/combinemaps
 }
 
 #username,
 #password {
-<<<<<<< HEAD
-	background-color: transparent;
-	color: white;
-	border: 2px solid white;
-	margin: 0.7em;
-	padding: .3em;
-
-	border-top-left-radius: 20px;
-	border-top-right-radius: 20px;
-
-	border-bottom-left-radius: 20px;
-	border-bottom-right-radius: 20px;
-
-	width: 25vw;
-=======
   background-color: transparent;
   color: white;
   border: 2px solid white;
@@ -52,7 +25,6 @@
   border-bottom-right-radius: 20px;
 
   width: 25vw;
->>>>>>> feature/combinemaps
 
   &:hover {
     color: white;
@@ -60,20 +32,6 @@
 }
 
 .btn-register {
-<<<<<<< HEAD
-	background-color: transparent;
-	color: white;
-	border: 2px solid white;
-	padding: 0.4em;
-	margin-top: 2em;
-
-	&:hover {
-		color: white;
-		cursor: pointer;
-	}
-}
-
-=======
   background-color: transparent;
   color: white;
   border: 2px solid white;
@@ -85,4 +43,3 @@
     cursor: pointer;
   }
 }
->>>>>>> feature/combinemaps
