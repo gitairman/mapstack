@@ -3,20 +3,20 @@
 }
 
 section {
+  // border: solid black 1px;
   display: flex;
   justify-content: space-evenly;
   width: 100%;
   margin: auto;
-  border: solid black 1px;
   padding: 2rem 0;
 }
 
 div {
-  border: solid black 2px;
+  // border: solid black 2px;
   padding: 1rem;
 }
 
-form {
+#create-map-form {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -39,8 +39,8 @@ li {
 }
 
 ul {
+  // border: solid black 1px;
   list-style: none;
-  border: solid black 1px;
   margin: 0;
   padding: 0;
 }
@@ -50,8 +50,8 @@ ul {
 }
 
 h3 {
+  // border: solid black 2px;
   margin: auto;
-  border: solid black 2px;
   text-align: center;
 }
 

@@ -1,20 +1,6 @@
 $(() => {
-  $("#create-map-form").on("submit", handleCreateNewMap);
   listMaps();
 });
-
-const handleCreateNewMap = (e) => {
-  e.preventDefault();
-  const map_name = $(e.target).serializeArray()[0].value;
-  console.log(map_name);
-
-  $.post("/api/maps", { map_name })
-    .done((result) => {
-      const id = result.id;
-      $(location).attr("href", `/maps/${id}`);
-    })
-    .fail((err) => console.log(err));
-};
 
 const listMaps = () => {
   return $.get(`/api/maps`).done(({ maps }) => {
@@ -33,12 +19,6 @@ const createMapsList = (maps) => {
     )
       .appendTo($mapsList)
       .on("click", handleMapListClick);
-  });
-};
-
-const createProfile = (id) => {
-  return $.get(`/api/profile`).done(({ profile }) => {
-    console.log(profile);
   });
 };
 

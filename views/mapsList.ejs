@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/styles/mapsList.css" />
     <link rel="stylesheet" href="/styles/nav.css" />
     <script src="/vendor/jquery-3.0.0.js"></script>
-    <script defer src="/scripts/profile.js"></script>
+    <script defer src="/scripts/mapsList.js"></script>
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -30,6 +30,11 @@
   </head>
   <body>
     <% include partials/nav %>
-    <div id="maplist-container"><ul id="maps-list"></ul></div>
+    <section id="profile-container">
+      <div id="allmaps-container" class="card">
+        <h2>All Maps</h2>
+        <ul id="maps-list"></ul>
+      </div>
+    </section>
   </body>
 </html>
