@@ -24,23 +24,6 @@ const initializeElements = () => {
   $favBtn.on("click", handleFavouriteClick);
   const $unFavBtn = $("#unfav-btn");
   $unFavBtn.on("click", handleUnFavouriteClick);
-
-  checkFavourited();
-};
-
-const checkFavourited = () => {
-  const map_id = $("#map").data("map_id");
-  $.get("/api/maps/favourite", { map_id })
-    .done((favourite) => {
-      if (!favourite) {
-        $("#fav-btn").removeClass("hidden");
-        $("#unfav-btn").addClass("hidden");
-        return;
-      }
-      $("#fav-btn").addClass("hidden");
-      $("#unfav-btn").removeClass("hidden");
-    })
-    .fail();
 };
 
 const handleFavouriteClick = () => {
@@ -354,7 +337,19 @@ const renderMapTitle = (map_id) => {
     .fail((err) => console.log(err));
 };
 
-const renderFavouriteBtn = (map_id) => {};
+const renderFavouriteBtn = (map_id) => {
+  $.get("/api/maps/favourite", { map_id })
+    .done((favourite) => {
+      if (!favourite) {
+        $("#fav-btn").removeClass("hidden");
+        $("#unfav-btn").addClass("hidden");
+        return;
+      }
+      $("#fav-btn").addClass("hidden");
+      $("#unfav-btn").removeClass("hidden");
+    })
+    .fail();
+};
 
 const handleFormInput = (e) => {
   const $pointForm = $(e.currentTarget);
