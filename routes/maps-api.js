@@ -61,10 +61,11 @@ router.get("/:id", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  const { map_name } = req.body;
+  const { map_name, map_desc } = req.body;
+  const created_by = req.session.user_id;
 
   mapQueries
-    .addMap(map_name)
+    .addMap(map_name, map_desc, created_by)
     .then((result) => {
       console.log("result in maps-api", result);
 

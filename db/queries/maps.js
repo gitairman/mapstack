@@ -16,10 +16,8 @@ const getMapById = (id) => {
   });
 };
 
-const addMap = (map_name) => {
+const addMap = (map_name, map_desc, created_by) => {
   console.log(map_name);
-  const map_desc = "testing";
-  const created_by = 1;
 
   return db
     .query(

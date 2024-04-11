@@ -19,9 +19,11 @@ const createProfile = () => {
 const handleCreateNewMap = (e) => {
   e.preventDefault();
   const map_name = $(e.target).serializeArray()[0].value;
+  const map_desc = $(e.target).serializeArray()[1].value;
+
   console.log(map_name);
 
-  $.post("/api/maps", { map_name })
+  $.post("/api/maps", { map_name, map_desc })
     .done((result) => {
       const id = result.id;
       $(location).attr("href", `/maps/${id}`);

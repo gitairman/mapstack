@@ -1,5 +1,24 @@
-.map-list,
-.favourites,
-.contributed {
-  background-color: lightblue;
+.hidden {
+  display: none;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 10rem;
+}
+
+a {
+  display: inline-block;
+  width: 75px;
+}
+
+button {
+  display: inline-block;
+  width: 125px;
+}
+
+#spacer {
+  height: 5vh;
 }
