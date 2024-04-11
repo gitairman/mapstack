@@ -17,6 +17,7 @@
     <!-- <script defer src=""></script> -->
   </head>
 
+<<<<<<< HEAD
   <body class="login-body">
     <article class="container">
       <form method="POST" action="/login">
@@ -37,3 +38,25 @@
     </article>
   </body>
 </html>
+=======
+	<script src="/vendor/jquery-3.0.0.js"></script>
+	<!-- <script defer src=""></script> -->
+</head>
+
+<body class="login-body">
+
+	<article class="container">
+		<form method="POST" action="/login">
+			<% if (error) { %>
+				<p class="error-message"><%= error %></p>
+		<% } %>
+			<input type="text" name="username" placeholder="Username" id="username">
+			<input type="password" name="password" placeholder="Password" id="password">
+			<button type="submit" class="btn-sign-in">Sign in</button>
+		</form>
+	</article>
+
+</body>
+
+</html>
+>>>>>>> 1d034a64b3aa932a5111d6bde3dbd82a63600ca4

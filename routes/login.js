@@ -10,6 +10,7 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   const { username, password } = req.body;
 
+<<<<<<< HEAD
   userQueries
     .checkUsers(username, password)
     .then((data) => {
@@ -27,6 +28,21 @@ router.post("/", (req, res) => {
     .catch((err) => {
       console.error(err);
     });
+=======
+	userQueries
+	.checkUsers(username, password)
+		.then(user => {
+			if (user) {
+				req.session.user_id = user.id;
+				return res.redirect('/profile');
+			}
+			res.render('login', { error: 'An error occurred. Please try again later.' });
+		})
+		.catch(err => {
+			console.error(err);
+			res.render('login', { error: 'An error occurred. Please try again later.' });
+		});
+>>>>>>> 1d034a64b3aa932a5111d6bde3dbd82a63600ca4
 });
 
 module.exports = router;

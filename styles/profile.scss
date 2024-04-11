@@ -1,7 +1,5 @@
-body {
-	display: flex;
-	justify-content: space-evenly;
 
+<<<<<<< HEAD
 	.map-list {
 		background-color: lightblue;
 		margin-top: 10em;
@@ -21,3 +19,10 @@ body {
 #spacer {
   height: 5vh;
 }
+=======
+.map-list,
+.favourites,
+.contributed {
+	background-color: lightblue;
+}
+>>>>>>> 1d034a64b3aa932a5111d6bde3dbd82a63600ca4

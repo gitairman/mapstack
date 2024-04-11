@@ -2,10 +2,17 @@
 require("dotenv").config();
 
 // Web server config
+<<<<<<< HEAD
 const sassMiddleware = require("./lib/sass-middleware");
 const express = require("express");
 const morgan = require("morgan");
 const cookieSession = require("cookie-session");
+=======
+const sassMiddleware = require('./lib/sass-middleware');
+const express = require('express');
+const morgan = require('morgan');
+const cookieSession = require('cookie-session');
+>>>>>>> 1d034a64b3aa932a5111d6bde3dbd82a63600ca4
 
 const PORT = process.env.PORT || 8080;
 const app = express();
@@ -25,6 +32,7 @@ app.use(
     isSass: false, // false => scss, true => sass
   })
 );
+<<<<<<< HEAD
 app.use(express.static("public"));
 app.use(
   cookieSession({
@@ -45,6 +53,23 @@ const mapsRoutes = require("./routes/maps");
 const loginRoutes = require("./routes/login");
 const registerRoutes = require("./routes/register");
 const logoutRoutes = require("./routes/logout");
+=======
+app.use(express.static('public'));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key 1', 'key 2']
+}));
+
+// Separated Routes for each Resource
+const userApiRoutes = require('./routes/users-api');
+const widgetApiRoutes = require('./routes/widgets-api');
+const usersRoutes = require('./routes/users');
+const mapsRoutes = require('./routes/maps');
+const loginRoutes = require('./routes/login');
+const registerRoutes = require('./routes/register');
+const profileRoutes = require('./routes/profile');
+const logoutRoutes = require('./routes/logout');
+>>>>>>> 1d034a64b3aa932a5111d6bde3dbd82a63600ca4
 
 // Mount all resource routes
 // Note: Endpoints that return data (eg. JSON) usually start with `/api`
@@ -58,7 +83,8 @@ app.use("/login", loginRoutes);
 app.use("/register", registerRoutes);
 app.use("/logout", logoutRoutes);
 // Note: mount other resources here, using the same pattern above
-app.use("/maps", mapsRoutes);
+app.use('/maps', mapsRoutes);
+app.use('/logout', logoutRoutes);
 
 // Home page
 // Warning: avoid creating more routes in this file!
