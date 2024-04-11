@@ -12,7 +12,7 @@ const getAllMaps = () => {
 const getMapById = (id) => {
   return db.query("SELECT * FROM maps WHERE id = $1;", [id]).then((data) => {
     console.log(data.rows);
-    return data.rows;
+    return data.rows[0];
   });
 };
 

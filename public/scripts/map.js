@@ -3,7 +3,6 @@ let loggedIn = null;
 
 $(() => {
   loggedIn = $("#logged-in").length;
-
   loadMap({ coords: { latitude: 50.0760328, longitude: -123.0367918 } });
   initializeElements();
 });
@@ -338,7 +337,24 @@ const handleMapLoaded = () => {
   console.log("map has been loaded");
   const map_id = $("#map").data("map_id");
   addPoints(map_id);
+  renderMapTitle(map_id);
+  renderFavouriteBtn(map_id);
 };
+
+const renderMapTitle = (map_id) => {
+  $.get(`/api/maps/${map_id}`)
+    .done((map) => {
+      console.log(map);
+
+      const $mapName = $("#map-name");
+      $(`<p>Currently Viewing <strong>${map.name}</strong> map</p>`).appendTo(
+        $mapName
+      );
+    })
+    .fail((err) => console.log(err));
+};
+
+const renderFavouriteBtn = (map_id) => {};
 
 const handleFormInput = (e) => {
   const $pointForm = $(e.currentTarget);
