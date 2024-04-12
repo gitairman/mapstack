@@ -4,7 +4,7 @@
 	background-color: lightpink;
 	border: 1px solid red;
 	width: 50%;
-	color: white;
+	color: red;
 	margin-left: 7vw;
 	padding: 0.2em;
 
@@ -14,4 +14,19 @@
 
   border-bottom-left-radius: 10px;
   border-bottom-right-radius: 10px;
+}
+
+#no-name-error {
+  margin-bottom: 0.5em;
+  width: 12rem;
+  text-align: center;
+  color: red;
+  border: 1px solid red;
+  background-color: lightpink;
+
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
 }

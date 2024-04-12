@@ -21,6 +21,8 @@
     <link rel="stylesheet" href="/styles/nav.css" />
     <script src="/vendor/jquery-3.0.0.js"></script>
     <script defer src="/scripts/profile.js"></script>
+        <link rel="stylesheet" href="/styles/errors.css" />
+
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
@@ -34,14 +36,16 @@
     <div class="body-container">
     <div class="profile-left">
     <form id="create-map-form">
-      <button id="create-map-btn"><i class="fa-solid fa-magnifying-glass-plus"></i>Create New Map</button>
+      <div class="create-map-head">
+      <button id="create-map-btn"></i>Create New Map</button>
       <p id="no-name-error" class="hidden">You must add a name!</p>
       <input
         id="new-map-name"
         name="name"
         type="text"
-        placeholder="new map name"
+        placeholder="New Map Name"
       />
+    </div>
       <textarea
         id="new-map-desc"
         name="description"
