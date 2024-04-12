@@ -5,6 +5,6 @@ CREATE TABLE points (
   title VARCHAR(255) NOT NULL,
   description VARCHAR(255),
   image_url VARCHAR(255),
-  map_id INTEGER NOT NULL REFERENCES maps(id),
-  added_by INTEGER NOT NULL REFERENCES users(id)
+  map_id INTEGER NOT NULL REFERENCES maps(id) ON DELETE CASCADE,
+  added_by INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE
 );

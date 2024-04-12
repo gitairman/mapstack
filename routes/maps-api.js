@@ -53,7 +53,9 @@ router.get("/:id", (req, res) => {
   mapQueries
     .getMapById(id)
     .then((map) => {
-      res.json({ map });
+      console.log(map);
+
+      res.json(map);
     })
     .catch((err) => {
       res.status(500).json({ error: err.message });

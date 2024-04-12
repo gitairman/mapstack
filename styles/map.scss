@@ -2,17 +2,10 @@ p {
   margin: 0;
 }
 
-nav {
-  position: fixed;
-  top: 0;
-  left: 0;
-  height: 50px;
-  z-index: 9999;
-}
-
 #map {
   position: absolute;
-  top: 150px;
+  left: 0;
+  top: 40px;
   bottom: 0;
   width: 100%;
 }
@@ -21,31 +14,31 @@ i {
   margin-right: 10px;
 }
 
-#maplist-container {
-  position: absolute;
-  top: 10%;
-  left: 1%;
-  z-index: 9999;
-  padding-right: 40px;
-}
+// #maplist-container {
+//   position: absolute;
+//   top: 10%;
+//   left: 1%;
+//   z-index: 9999;
+//   padding-right: 40px;
+// }
 
-#maps-list {
-  opacity: 50%;
-  list-style: none;
-}
+// #maps-list {
+//   opacity: 50%;
+//   list-style: none;
+// }
 
-#maps-list li {
-  margin: 10px;
-}
+// #maps-list li {
+//   margin: 10px;
+// }
 
-#maplist-container:hover #maps-list {
-  cursor: pointer;
-  opacity: 100%;
-}
+// #maplist-container:hover #maps-list {
+//   cursor: pointer;
+//   opacity: 100%;
+// }
 
-#maplist-container:hover {
-  background-color: white;
-}
+// #maplist-container:hover {
+//   background-color: white;
+// }
 
 // #maplist-container:hover #maps-list {
 //   visibility: visible;
@@ -75,6 +68,7 @@ i {
   border-radius: 0 10px 10px 10px;
   background-color: lightsalmon;
   padding: 10px;
+  margin: 0;
 }
 
 #edit-form p {

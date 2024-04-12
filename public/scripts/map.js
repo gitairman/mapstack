@@ -1,7 +1,8 @@
 let map;
-let loggedIn = true;
+let loggedIn = null;
 
 $(() => {
+  loggedIn = $("#logged-in").length;
   loadMap({ coords: { latitude: 50.0760328, longitude: -123.0367918 } });
   initializeElements();
 });
@@ -24,40 +25,34 @@ const initializeElements = () => {
   const $unFavBtn = $("#unfav-btn");
   $unFavBtn.on("click", handleUnFavouriteClick);
 
-  checkFavourited();
+  const $mapName = $("#map-name");
+  $mapName.on("click", handleMapNameClick);
 };
 
-const checkFavourited = () => {
-  const map_id = $("#map").data("map_id");
-  $.get("/api/maps/favourite", { map_id })
-    .done((favourite) => {
-      if (!favourite) {
-        $("#fav-btn").removeClass("hidden");
-        $("#unfav-btn").addClass("hidden");
-        return;
-      }
-      $("#fav-btn").addClass("hidden");
-      $("#unfav-btn").removeClass("hidden");
-    })
-    .fail();
+const handleMapNameClick = (e) => {
+  const data = e.target.id.split("-");
+  const toUnFav = data[0] === "unfav";
+  const map_id = data[2];
+  if (toUnFav) return handleUnFavouriteClick(map_id);
+  handleFavouriteClick(map_id);
 };
 
-const handleFavouriteClick = () => {
+const handleFavouriteClick = (map_id) => {
   console.log("inside favourite click");
 
-  const data = { user_id, map_id: $("#map").data("map_id") };
+  const data = { map_id };
   $.post("/api/maps/favourite", data)
-    .done(() => checkFavourited())
+    .done(() => renderFavouriteBtn(map_id))
     .fail((err) => console.log(err));
 };
-const handleUnFavouriteClick = () => {
+const handleUnFavouriteClick = (map_id) => {
   console.log("inside favourite click");
-  const data = { user_id, map_id: $("#map").data("map_id") };
+  const data = { map_id };
   $.ajax(`/api/maps/favourite`, {
     method: "DELETE",
     data,
   })
-    .done(() => checkFavourited())
+    .done(() => renderFavouriteBtn(map_id))
     .fail((err) => console.log(err));
 };
 
@@ -81,8 +76,8 @@ const handleMapClick = (e) => {
   $pointForm[0].reset();
   $pointForm.data("coords", e.latlng);
   $pointForm
-    .css("top", e.containerPoint.y)
-    .css("left", e.containerPoint.x)
+    .css("top", e.containerPoint.y + 40)
+    .css("left", e.containerPoint.x - 15)
     .removeClass("hidden");
 
   $("#point-title").trigger("focus");
@@ -121,7 +116,7 @@ const renderPointMarker = (point) => {
 
   const marker = L.marker(Object.values(point.coords), {
     title: point.title,
-    draggable: true,
+    draggable: loggedIn ? true : false,
     point_id: point.id,
   });
   marker.addTo(map).bindPopup(
@@ -336,6 +331,40 @@ const handleMapLoaded = () => {
   console.log("map has been loaded");
   const map_id = $("#map").data("map_id");
   addPoints(map_id);
+  renderMapTitle(map_id);
+};
+
+const renderMapTitle = (map_id) => {
+  $.get(`/api/maps/${map_id}`)
+    .done((map) => {
+      console.log(map);
+
+      const $mapName = $("#map-name");
+      $(`<p>Currently Viewing <strong>${map.name}</strong> map</p>`).appendTo(
+        $mapName
+      );
+      renderFavouriteBtn(map_id);
+    })
+    .fail((err) => console.log(err));
+};
+
+const renderFavouriteBtn = (map_id) => {
+  $(`#fav-btn-${map_id}`).remove();
+  $(`#unfav-btn-${map_id}`).remove();
+
+  $.get("/api/maps/favourite", { map_id })
+    .done((favourite) => {
+      if (!favourite) {
+        $(`<button id="fav-btn-${map_id}">FAVOURITE</button>`).appendTo(
+          $("#map-name")
+        );
+        return;
+      }
+      $(`<button id="unfav-btn-${map_id}">UNFAVOURITE</button>`).appendTo(
+        $("#map-name")
+      );
+    })
+    .fail((err) => console.log(err));
 };
 
 const handleFormInput = (e) => {

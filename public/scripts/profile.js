@@ -1,5 +1,6 @@
 $(() => {
   $("#create-map-form").on("submit", handleCreateNewMap);
+  $("#create-map-form").on("input", handleFormInput);
   $("#profile-container").on("click", handleMapListClick);
   createProfile();
 });
@@ -22,6 +23,10 @@ const handleCreateNewMap = (e) => {
   const map_desc = $(e.target).serializeArray()[1].value;
 
   console.log(map_name);
+  if (!map_name) {
+    $("#new-map-name").trigger("focus");
+    return $("#no-name-error").removeClass("hidden");
+  }
 
   $.post("/api/maps", { map_name, map_desc })
     .done((result) => {
@@ -29,6 +34,10 @@ const handleCreateNewMap = (e) => {
       $(location).attr("href", `/maps/${id}`);
     })
     .fail((err) => console.log(err));
+};
+
+const handleFormInput = () => {
+  $("#no-name-error").addClass("hidden");
 };
 
 const renderAllMaps = ({ allMaps, favourites }) => {
@@ -112,6 +121,10 @@ const handleDeleteMap = (map_id) => {
   $.ajax(`/api/maps/${map_id}`, {
     method: "DELETE",
   })
-    .done(() => createProfile())
+    .done((result) => {
+      console.log(result);
+
+      createProfile();
+    })
     .fail((err) => console.log(err));
 };
