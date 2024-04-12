@@ -1,20 +1,29 @@
 <header>
-  <nav class="navbar navbar-expand-md navbar-dark">
-    <div class="navbar-collapse">
-      <a class="navbar-brand" href="/maps">Maps</a>
-      <% if (typeof username !== "undefined" ) { %>
-      <span class="navbar-text">Logged in as <%= username %></span>
-      <form method="POST" action="/logout">
-        <button type="submit" class="btn btn-light mr-2">Log out</button>
-      </form>
-      <% } else { %>
-      <form method="GET" action="/login">
-        <button type="submit" class="btn btn-login">Log in</button>
-      </form>
-      <form method="GET" action="/register">
-        <button type="submit" class="btn btn-register">Register</button>
-      </form>
-      <% } %>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap"
+    rel="stylesheet">
+
+  <nav class="navbar">
+    <div class="maps">
+      <a class="maps-link" href="/maps">Maps</a>
+    </div>
+    <div class="nav-right">
+      <% if (typeof username !=="undefined" ) { %>
+        <span class="navbar-text">Logged in as : <%= username %></span>
+        <form method="POST" action="/logout">
+          <button type="submit" class="btn-logout">Log out</button>
+        </form>
+        <% } else { %>
+          <form method="GET" action="/login">
+            <button type="submit" class="btn btn-login">Log in</button>
+          </form>
+          <form method="GET" action="/register">
+            <button type="submit" class="btn btn-register">Register</button>
+          </form>
+          <% } %>
+    </div>
     </div>
   </nav>
 </header>

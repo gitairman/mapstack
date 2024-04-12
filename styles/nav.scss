@@ -1,7 +1,27 @@
-header {
+.navbar {
   display: flex;
   justify-content: space-between;
-  background-color: lightblue;
-  padding: 2em;
-  height: 3vh;
+  background-color: white;
+  opacity: 5; 
+  width: 100%;
+  height: 10vh;
+}
+
+.maps-link {
+	color: black;
+	padding-left: 2em;
+  font-size: 30px;
+  text-decoration: none;
+  font-family: "Roboto", serif;
+
+  &:hover {
+    color: white;
+  }
+}
+
+.btn-logout,
+.btn-login,
+.btn-register {
+  display: flex;
+  justify-content: row;
 }

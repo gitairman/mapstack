@@ -27,45 +27,49 @@
       integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
       crossorigin="anonymous"
     ></script>
+
+    <% include partials/nav %>
   </head>
   <body>
-    <% include partials/nav %>
-    <section id="profile-container">
-      <div id="allmaps-container" class="card">
-        <h2>All Maps</h2>
-        <ul id="maps-list"></ul>
-      </div>
-      <div id="favourites-container" class="card">
-        <h2>Favourites</h2>
-        <ul id="favourites-list"></ul>
+    <div class="body-container">
+    <div class="profile-left">
+    <form id="create-map-form">
+      <button id="create-map-btn"><i class="fa-solid fa-magnifying-glass-plus"></i>Create New Map</button>
+      <p id="no-name-error" class="hidden">You must add a name!</p>
+      <input
+        id="new-map-name"
+        name="name"
+        type="text"
+        placeholder="new map name"
+      />
+      <textarea
+        id="new-map-desc"
+        name="description"
+        type="text"
+        placeholder="description"
+      ></textarea>
+    </form>
+    <div id="favourites-container" class="card">
+      <h2>Favourites</h2>
+      <ul id="favourites-list"></ul>
+    </div>
+    </div>
+
+    <div id="profile-container">
+      <div id="created-container" class="card">
+        <h2>Created</h2>
+        <ul id="created-list"></ul>
       </div>
       <div id="contributed-container" class="card">
         <h2>Contributed To</h2>
         <ul id="contributed-list"></ul>
       </div>
-      <div id="created-container" class="card">
-        <h2>Created</h2>
-        <ul id="created-list"></ul>
+      <div id="allmaps-container" class="card">
+        <h2>All Maps</h2>
+        <ul id="maps-list"></ul>
       </div>
-    </section>
+    </div>
+    </div>
 
-    <section id="create-map-container">
-      <form id="create-map-form">
-        <button id="create-map-btn"><i class="fa-solid fa-magnifying-glass-plus"></i> Create New Map</button>
-        <p id="no-name-error" class="hidden">You must add a name!</p>
-        <input
-          id="new-map-name"
-          name="name"
-          type="text"
-          placeholder="new map name"
-        />
-        <textarea
-          id="new-map-desc"
-          name="description"
-          type="text"
-          placeholder="description"
-        ></textarea>
-      </form>
-    </section>
   </body>
 </html>
