@@ -1,4 +1,4 @@
-# Mapstack Project
+# Mapstack Project by Lily Henderson and Aaron Hopkins
 
 Mapstack is a simple, responsive, map creating and viewing application.
 
