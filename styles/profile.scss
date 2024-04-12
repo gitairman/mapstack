@@ -33,17 +33,35 @@
 #allmaps-container {
   width: 22vw;
   height: 85vh;
-  justify-content: space-between;
 }
 
 h2 {
   align-items: flex-start;
 }
 
+#maps-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+#contributed-list li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
 //description box
 #new-map-desc {
   height: 37vh;
   margin-bottom: 10px;
+}
+
+#new-map-name {
+  margin-top: 0; /* Remove any default margin */
+  margin-bottom: auto; /* Push to the top */
 }
 
 //Button from css scan
@@ -57,7 +75,7 @@ h2 {
   box-sizing: border-box;
   color: #fff;
   cursor: pointer;
-  display: inline-flex;
+  // display: inline-flex;
   font-family: "Roboto", serif;
   height: 5vh;
   justify-content: center;
@@ -77,10 +95,4 @@ h2 {
   #create-map-btn:hover {
     background-color: darkblue;
   }
-}
-
-h3 {
-  margin: auto;
-  border: solid black 2px;
-  text-align: center;
 }
