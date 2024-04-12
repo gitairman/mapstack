@@ -24,24 +24,35 @@ const initializeElements = () => {
   $favBtn.on("click", handleFavouriteClick);
   const $unFavBtn = $("#unfav-btn");
   $unFavBtn.on("click", handleUnFavouriteClick);
+
+  const $mapName = $("#map-name");
+  $mapName.on("click", handleMapNameClick);
 };
 
-const handleFavouriteClick = () => {
+const handleMapNameClick = (e) => {
+  const data = e.target.id.split("-");
+  const toUnFav = data[0] === "unfav";
+  const map_id = data[2];
+  if (toUnFav) return handleUnFavouriteClick(map_id);
+  handleFavouriteClick(map_id);
+};
+
+const handleFavouriteClick = (map_id) => {
   console.log("inside favourite click");
 
-  const data = { user_id, map_id: $("#map").data("map_id") };
+  const data = { map_id };
   $.post("/api/maps/favourite", data)
-    .done(() => checkFavourited())
+    .done(() => renderFavouriteBtn(map_id))
     .fail((err) => console.log(err));
 };
-const handleUnFavouriteClick = () => {
+const handleUnFavouriteClick = (map_id) => {
   console.log("inside favourite click");
-  const data = { user_id, map_id: $("#map").data("map_id") };
+  const data = { map_id };
   $.ajax(`/api/maps/favourite`, {
     method: "DELETE",
     data,
   })
-    .done(() => checkFavourited())
+    .done(() => renderFavouriteBtn(map_id))
     .fail((err) => console.log(err));
 };
 
@@ -321,7 +332,6 @@ const handleMapLoaded = () => {
   const map_id = $("#map").data("map_id");
   addPoints(map_id);
   renderMapTitle(map_id);
-  renderFavouriteBtn(map_id);
 };
 
 const renderMapTitle = (map_id) => {
@@ -333,20 +343,26 @@ const renderMapTitle = (map_id) => {
       $(`<p>Currently Viewing <strong>${map.name}</strong> map</p>`).appendTo(
         $mapName
       );
+      renderFavouriteBtn(map_id);
     })
     .fail((err) => console.log(err));
 };
 
 const renderFavouriteBtn = (map_id) => {
+  $(`#fav-btn-${map_id}`).remove();
+  $(`#unfav-btn-${map_id}`).remove();
+
   $.get("/api/maps/favourite", { map_id })
     .done((favourite) => {
       if (!favourite) {
-        $("#fav-btn").removeClass("hidden");
-        $("#unfav-btn").addClass("hidden");
+        $(`<button id="fav-btn-${map_id}">FAVOURITE</button>`).appendTo(
+          $("#map-name")
+        );
         return;
       }
-      $("#fav-btn").addClass("hidden");
-      $("#unfav-btn").removeClass("hidden");
+      $(`<button id="unfav-btn-${map_id}">UNFAVOURITE</button>`).appendTo(
+        $("#map-name")
+      );
     })
     .fail();
 };
