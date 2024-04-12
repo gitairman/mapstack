@@ -26,8 +26,9 @@ This project demonstrates HTML, CSS, JS, jQuery and AJAX front-end skills, as we
 
 ## Final Product
 
-![desktop width](/screenshots/)
-![smartphone width](/screenshots/)
+![profile view](/screenshots/profile.png)
+![map view](/screenshots/mapview.png)
+![point view](/screenshots/pointview.png)
 
 ## Stack Requirements
 A web app that allows users to collaboratively create maps which list multiple "points". For example: "Best Places to Eat Around Town" or "Locations of Movie Scenes".
