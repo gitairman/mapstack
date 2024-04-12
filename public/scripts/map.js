@@ -364,7 +364,7 @@ const renderFavouriteBtn = (map_id) => {
         $("#map-name")
       );
     })
-    .fail();
+    .fail((err) => console.log(err));
 };
 
 const handleFormInput = (e) => {
