@@ -41,7 +41,7 @@ h2 {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.8em;
-  
+
   &:hover {
     color: rgb(99, 98, 98);
   }
@@ -109,7 +109,11 @@ h2 {
   align-items: center;
   appearance: none;
   margin: 1.2em;
-  background-image: radial-gradient(100% 100% at 100% 0, #5adaff 0, #5468ff 100%);
+  background-image: radial-gradient(
+    100% 100% at 100% 0,
+    #5adaff 0,
+    #5468ff 100%
+  );
   border: 0;
   border-radius: 6px;
   box-sizing: border-box;
@@ -121,7 +125,7 @@ h2 {
   overflow: hidden;
   position: relative;
   text-decoration: none;
-  transition: box-shadow .15s, transform .15s;
+  transition: box-shadow 0.15s, transform 0.15s;
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
@@ -141,4 +145,8 @@ h2 {
 #star {
   color: gold;
   margin-right: 1em;
+}
+
+.hidden {
+  display: none;
 }

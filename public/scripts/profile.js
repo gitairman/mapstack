@@ -1,7 +1,7 @@
 $(() => {
   $("#create-map-form").on("submit", handleCreateNewMap);
   $("#create-map-form").on("input", handleFormInput);
-  $("#profile-container").on("click", handleMapListClick);
+  $("body").on("click", handleMapListClick);
   createProfile();
 });
 
@@ -104,6 +104,8 @@ const handleMapListClick = (e) => {
 };
 
 const handleFavouriteToggle = (btn) => {
+  console.log(btn);
+
   let method;
   const [todo, , map_id] = btn.id.split("-");
   if (todo === "unfav") method = "DELETE";
