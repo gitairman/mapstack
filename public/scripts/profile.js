@@ -1,7 +1,7 @@
 $(() => {
   $("#create-map-form").on("submit", handleCreateNewMap);
   $("#create-map-form").on("input", handleFormInput);
-  $("#profile-container").on("click", handleMapListClick);
+  $("body").on("click", handleMapListClick);
   createProfile();
 });
 
@@ -50,7 +50,7 @@ const renderAllMaps = ({ allMaps, favourites }) => {
       ${
         isFavourite
           ? ""
-          : `<button id=${`fav-btn-${map.id}`}>Favourite</button>`
+          : `<button id=${`fav-btn-${map.id}`}><i id="star1"class="fa-regular fa-star"></i>Favourite</button>`
       }
       </li>`
     ).appendTo($mapsList);
@@ -64,7 +64,7 @@ const renderFavourites = (favourites) => {
     $(
       `<li class="map" >
       <a id=${`fav-${map.id}`} href=${`/maps/${map.id}`}>${map.name}</a>
-      <button id=${`unfav-btn-${map.id}`}>UnFavourite</button>
+      <button id=${`unfav-btn-${map.id}`}><i class="fa-solid fa-star" id="star"></i>UnFavourite</button>
       </li>`
     ).appendTo($favsList);
   });
@@ -102,6 +102,8 @@ const handleMapListClick = (e) => {
 };
 
 const handleFavouriteToggle = (btn) => {
+  console.log(btn);
+
   let method;
   const [todo, , map_id] = btn.id.split("-");
   if (todo === "unfav") method = "DELETE";

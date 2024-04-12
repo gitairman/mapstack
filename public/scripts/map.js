@@ -327,14 +327,14 @@ const renderFavouriteBtn = (map_id) => {
   $.get("/api/maps/favourite", { map_id })
     .done((favourite) => {
       if (!favourite) {
-        $(`<button id="fav-btn-${map_id}">FAVOURITE</button>`).appendTo(
-          $("#map-name")
-        );
+        $(
+          `<button id=${`fav-btn-${map_id}`}><i id="star1"class="fa-regular fa-star"></i>Favourite</button>`
+        ).appendTo($("#map-name"));
         return;
       }
-      $(`<button id="unfav-btn-${map_id}">UNFAVOURITE</button>`).appendTo(
-        $("#map-name")
-      );
+      $(
+        `<button id=${`unfav-btn-${map_id}`}><i class="fa-solid fa-star" id="star"></i>UnFavourite</button>`
+      ).appendTo($("#map-name"));
     })
     .fail((err) => console.log(err));
 };
