@@ -283,7 +283,6 @@ const handleEditFormSubmit = (e) => {
     return a;
   }, {});
   point.map_id = $("#map").data("map_id");
-  point.added_by = user_id; // user_id of logged in user to go here
   console.log(point);
   if (!point.title) {
     $pointForm.children("#no-title-error").removeClass("hidden");
