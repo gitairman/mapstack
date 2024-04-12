@@ -343,7 +343,7 @@ const renderMapTitle = (map_id) => {
       $(`<p>Currently Viewing <strong>${map.name}</strong> map</p>`).appendTo(
         $mapName
       );
-      renderFavouriteBtn(map_id);
+      if (loggedIn) renderFavouriteBtn(map_id);
     })
     .fail((err) => console.log(err));
 };
