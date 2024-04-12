@@ -1,10 +1,7 @@
 const db = require("../connection");
 
 const getAllPoints = () => {
-  // console.log("inside getPoints function");
-
   return db.query("SELECT * FROM points;").then((data) => {
-    // console.log(data.rows);
     return data.rows;
   });
 };
@@ -13,7 +10,6 @@ const getPointsByMapId = (id) => {
   return db
     .query("SELECT * FROM points WHERE map_id = $1;", [id])
     .then((data) => {
-      // console.log(data.rows);
       return data.rows;
     })
     .catch((err) => err);
@@ -35,7 +31,6 @@ const addPoint = ({
     Number(map_id),
     Number(added_by),
   ];
-  console.log(pData);
 
   return db
     .query(
@@ -47,8 +42,6 @@ const addPoint = ({
 };
 
 const updatePointById = (id, { title, image_url, description, coords }) => {
-  console.log(id, title, description, image_url, coords);
-
   const pData = [];
   let queryString = "UPDATE points SET ";
   if (title) {
@@ -69,8 +62,6 @@ const updatePointById = (id, { title, image_url, description, coords }) => {
   }
   pData.push(id);
   queryString += `WHERE id=$${pData.length};`;
-
-  console.log(queryString, pData);
 
   return db
     .query(queryString, pData)

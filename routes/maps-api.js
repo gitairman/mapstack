@@ -53,8 +53,6 @@ router.get("/:id", (req, res) => {
   mapQueries
     .getMapById(id)
     .then((map) => {
-      console.log(map);
-
       res.json(map);
     })
     .catch((err) => {
@@ -69,8 +67,6 @@ router.post("/", (req, res) => {
   mapQueries
     .addMap(map_name, map_desc, created_by)
     .then((result) => {
-      console.log("result in maps-api", result);
-
       res.send(result);
     })
     .catch((err) => {
@@ -81,8 +77,6 @@ router.post("/", (req, res) => {
 router.post("/favourite", (req, res) => {
   const { map_id } = req.body;
   const user_id = req.session.user_id;
-  console.log(req.session);
-
   mapQueries
     .favouriteMap(map_id, user_id)
     .then((result) => res.send(result))

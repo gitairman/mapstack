@@ -8,7 +8,6 @@ $(() => {
 const createProfile = () => {
   $.get("/api/maps/profile")
     .done((data) => {
-      console.log(data);
       renderAllMaps(data);
       renderFavourites(data.favourites);
       renderContributedTo(data.contributions);
@@ -22,7 +21,6 @@ const handleCreateNewMap = (e) => {
   const map_name = $(e.target).serializeArray()[0].value;
   const map_desc = $(e.target).serializeArray()[1].value;
 
-  console.log(map_name);
   if (!map_name) {
     $("#new-map-name").trigger("focus");
     return $("#no-name-error").removeClass("hidden");
@@ -122,8 +120,6 @@ const handleDeleteMap = (map_id) => {
     method: "DELETE",
   })
     .done((result) => {
-      console.log(result);
-
       createProfile();
     })
     .fail((err) => console.log(err));

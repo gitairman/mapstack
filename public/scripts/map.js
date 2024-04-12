@@ -38,15 +38,12 @@ const handleMapNameClick = (e) => {
 };
 
 const handleFavouriteClick = (map_id) => {
-  console.log("inside favourite click");
-
   const data = { map_id };
   $.post("/api/maps/favourite", data)
     .done(() => renderFavouriteBtn(map_id))
     .fail((err) => console.log(err));
 };
 const handleUnFavouriteClick = (map_id) => {
-  console.log("inside favourite click");
   const data = { map_id };
   $.ajax(`/api/maps/favourite`, {
     method: "DELETE",
@@ -66,12 +63,6 @@ const getPosition = () => {
 
 const handleMapClick = (e) => {
   if (!loggedIn) return;
-
-  console.log(e);
-  console.log($("#map").data("map_id"));
-
-  console.log("you clicked on the map");
-  // const $markerPane = $(".leaflet-marker-pane");
   const $pointForm = $("#point-form");
   $pointForm[0].reset();
   $pointForm.data("coords", e.latlng);
@@ -95,7 +86,7 @@ const loadMap = (position) => {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(map);
-  L.Control.geocoder().addTo(map);
+  // L.Control.geocoder().addTo(map);
 
   // Handling clicks on map
   map.on("click", handleMapClick);
@@ -149,7 +140,6 @@ const renderPointMarker = (point) => {
 };
 
 const handleMarkerMove = (e) => {
-  console.log(e);
   const {
     target: {
       options: { point_id },
@@ -165,7 +155,6 @@ const handleMarkerMove = (e) => {
 };
 
 const handlePopupClick = (e) => {
-  console.log(e.target);
   const [action, point_id] = e.target.id.split("-");
   if (action === "delete") return removeMarker(Number(point_id));
   if (action === "edit")
@@ -173,20 +162,16 @@ const handlePopupClick = (e) => {
 };
 
 const removeMarker = (point_id) => {
-  // console.log(point_id);
-
   $.ajax(`/api/points/${point_id}`, {
     method: "DELETE",
   })
     .done((result) => {
-      console.log(result);
       addPoints($("#map").data("map_id"));
     })
     .fail((err) => console.log(err));
 };
 
 const editMarker = ($pointDetails) => {
-  console.log($pointDetails);
   const { 0: titleEl, 1: imgEl, 2: descriptionEl } = $pointDetails;
   const title = titleEl.innerText;
   const image_url = imgEl.src;
@@ -194,13 +179,11 @@ const editMarker = ($pointDetails) => {
   const point_id = Number(titleEl.id.split("-")[2]);
 
   const $editForm = $("#edit-form");
-  console.log($editForm);
 
   $editForm[0][0].value = title;
   $editForm[0][1].value = description;
   $editForm[0][2].value = image_url;
   const $popupBox = $pointDetails.closest(".leaflet-popup-content");
-  console.log($editForm);
 
   $editForm.prependTo($popupBox);
   $editForm.removeClass("hidden");
@@ -239,7 +222,6 @@ const addPoints = (map_id) => {
 };
 
 const handleMapListClick = (e) => {
-  console.log(e.target.id);
   addPoints(e.target.id);
 };
 
@@ -254,7 +236,6 @@ const handlePointFormSubmit = (e) => {
   }, {});
   point.coords = [newPointCoords.lat, newPointCoords.lng];
   point.map_id = $("#map").data("map_id");
-  console.log(point);
   if (!point.title) {
     $("#no-title-error").removeClass("hidden");
     $("#point-title").trigger("focus");
@@ -265,7 +246,6 @@ const handlePointFormSubmit = (e) => {
 
   $.post("/api/points", point)
     .done((result) => {
-      console.log(result);
       addPoints($("#map").data("map_id"));
     })
     .fail((err) => console.log(err));
@@ -273,7 +253,6 @@ const handlePointFormSubmit = (e) => {
 
 const handleEditFormSubmit = (e) => {
   e.preventDefault();
-  console.log(e);
   const $pointForm = $(e.target);
   const point_id = $pointForm.data("point_id");
 
@@ -283,7 +262,6 @@ const handleEditFormSubmit = (e) => {
     return a;
   }, {});
   point.map_id = $("#map").data("map_id");
-  console.log(point);
   if (!point.title) {
     $pointForm.children("#no-title-error").removeClass("hidden");
     $pointForm.children("#point-title").trigger("focus");
@@ -297,7 +275,6 @@ const handleEditFormSubmit = (e) => {
     data: point,
   })
     .done((result) => {
-      console.log(result);
       addPoints($("#map").data("map_id"));
     })
     .fail((err) => console.log(err));
@@ -305,7 +282,6 @@ const handleEditFormSubmit = (e) => {
 
 const handleFormReset = (e) => {
   const $pointForm = $(e.currentTarget);
-  console.log("reset form");
   $pointForm.addClass("hidden");
   $pointForm.siblings("div").removeClass("hidden");
   $pointForm.prependTo($("body"));
@@ -327,7 +303,6 @@ const handleFormLosingFocus = (e) => {
 };
 
 const handleMapLoaded = () => {
-  console.log("map has been loaded");
   const map_id = $("#map").data("map_id");
   addPoints(map_id);
   renderMapTitle(map_id);
@@ -336,8 +311,6 @@ const handleMapLoaded = () => {
 const renderMapTitle = (map_id) => {
   $.get(`/api/maps/${map_id}`)
     .done((map) => {
-      console.log(map);
-
       const $mapName = $("#map-name");
       $(`<p>Currently Viewing <strong>${map.name}</strong> map</p>`).appendTo(
         $mapName

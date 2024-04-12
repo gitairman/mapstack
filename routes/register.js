@@ -8,16 +8,12 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  console.log(req.body);
-
   const { username, password } = req.body;
   const hashedPassword = bcrypt.hashSync(password, 10);
 
   userQueries
     .newUser(username, hashedPassword)
     .then((data) => {
-      console.log(data);
-
       req.session.username = data.username;
       req.session.user_id = data.id;
       return res.redirect("/maps");

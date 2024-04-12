@@ -13,8 +13,6 @@ router.post("/", (req, res) => {
   userQueries
     .checkUsers(username, password)
     .then((data) => {
-      console.log(data);
-
       if (data) {
         req.session.user_id = data.id;
         req.session.username = data.username;
